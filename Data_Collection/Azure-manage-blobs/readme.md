@@ -2,7 +2,9 @@
 
 Run this command line in your terminal
 
+```bash
 !python3 -m pip install -r requirements.txt
+```
 
 ### Upload process
 
@@ -22,7 +24,6 @@ python3 blob_upload.py \
 The program will go through each directory and upload files that are present within it. If the file already exists in Azure, no duplicate files are uploaded. The program expects the directories to only have files, and no other directories. If this is difficult to guarantee we could only upload certain file types. 
 
 A log file called blob_output_log.txt is created, and looks like this after a successful upload, and then an attempted duplicate upload: 
-
 
 ![image.png](https://mail.google.com/mail/u/1?ui=2&ik=2990b113ad&attid=0.0.1&permmsgid=msg-f:1694327197779095464&th=1783759c04e7efa8&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ91uKltDaAI5WjvqvihOSAXZdfsxsMn0Bp3YfNy6dqZw9yxSibwarFMW0fAHj3906Ikxuptp8sqK3bHD4vzGLnNRX02BOZUIQVwGxnfmdjGmgWpCf2twGW2uk8&disp=emb&realattid=ii_kmayurni0)
 
