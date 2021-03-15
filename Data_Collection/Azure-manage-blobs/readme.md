@@ -23,6 +23,9 @@ The program will go through each directory and upload files that are present wit
 
 A log file called blob_output_log.txt is created, and looks like this after a successful upload, and then an attempted duplicate upload: 
 
+
+![image.png](https://mail.google.com/mail/u/1?ui=2&ik=2990b113ad&attid=0.0.1&permmsgid=msg-f:1694327197779095464&th=1783759c04e7efa8&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ91uKltDaAI5WjvqvihOSAXZdfsxsMn0Bp3YfNy6dqZw9yxSibwarFMW0fAHj3906Ikxuptp8sqK3bHD4vzGLnNRX02BOZUIQVwGxnfmdjGmgWpCf2twGW2uk8&disp=emb&realattid=ii_kmayurni0)
+
 Expected usage: 
 ```bash
 python blob_upload.py directory1 directory2 directory3 directory directory5 ...  image.png
