@@ -128,7 +128,11 @@ def create_stereo_depth_pipeline(from_camera=True):
     else:
         cam_left      = pipeline.createXLinkIn()
         cam_right     = pipeline.createXLinkIn()
+    rgb_cam          = pipeline.createColorCamera()
+
     stereo            = pipeline.createStereoDepth()
+    xout_rgb_preview      = pipeline.createXLinkOut()
+    xout_grb_video        = pipeline.createXLinkOut()
     xout_left         = pipeline.createXLinkOut()
     xout_right        = pipeline.createXLinkOut()
     xout_depth        = pipeline.createXLinkOut()
@@ -136,6 +140,11 @@ def create_stereo_depth_pipeline(from_camera=True):
     xout_rectif_left  = pipeline.createXLinkOut()
     xout_rectif_right = pipeline.createXLinkOut()
 
+	rgb_cam.setPreviewSize(540, 540)
+    rgb_cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+    rgb_cam.setInterleaved(False)
+    rgb_cam.setBoardSocket(dai.CameraBoardSocket.RGB)
+    
     if from_camera:
         cam_left .setBoardSocket(dai.CameraBoardSocket.LEFT)
         cam_right.setBoardSocket(dai.CameraBoardSocket.RIGHT)
@@ -168,7 +177,11 @@ def create_stereo_depth_pipeline(from_camera=True):
     xout_disparity   .setStreamName('disparity')
     xout_rectif_left .setStreamName('rectified_left')
     xout_rectif_right.setStreamName('rectified_right')
-
+	xout_rgb_preview.setStreamName('rgb_preview')
+    xout_rgb_video  .setStreamName('rgb_video')
+    
+    rgb_cam.preview.link(xout_preview.input)
+    rgb_cam.video  .link(xout_video.input)
     cam_left .out        .link(stereo.left)
     cam_right.out        .link(stereo.right)
     stereo.syncedLeft    .link(xout_left.input)
@@ -178,7 +191,8 @@ def create_stereo_depth_pipeline(from_camera=True):
     stereo.rectifiedLeft .link(xout_rectif_left.input)
     stereo.rectifiedRight.link(xout_rectif_right.input)
 
-    streams = ['left', 'right']
+    streams = ['rgb_preview', 'rgb_video']
+    streams.extend(['left', 'right'])
     if out_rectified:
         streams.extend(['rectified_left', 'rectified_right'])
     streams.extend(['disparity', 'depth'])
@@ -207,6 +221,7 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
     elif name == 'rgb_video': # YUV NV12
         yuv = np.array(data).reshape((h * 3 // 2, w)).astype(np.uint8)
         frame = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_NV12)
+        cv2.imwrite(sp+'rgb'+str(disp_frame_count)+'.png', cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
     elif name == 'depth':
         # TODO: this contains FP16 with (lrcheck or extended or subpixel)
         frame = np.array(data).astype(np.uint8).view(np.uint16).reshape((h, w))
@@ -239,8 +254,10 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
         frame = np.array(data).reshape((h, w)).astype(np.uint8)
         if name.startswith('rectified_'):
             frame = cv2.flip(frame, 1)
+            cv2.imwrite(sp+'rect_left'+str(disp_frame_count)+'.png', frame)
         if name == 'rectified_right':
             last_rectif_right = frame
+            cv2.imwrite(sp+'rect_right'+str(disp_frame_count)+'.png', last_rectif_right)
     return frame,disp_frame_count
 
 def test_pipeline():
