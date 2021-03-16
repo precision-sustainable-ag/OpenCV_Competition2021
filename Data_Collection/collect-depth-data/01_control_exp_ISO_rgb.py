@@ -74,6 +74,7 @@ with dai.Device(pipeline) as dev:
     crop_y = 0
 
     default_wb=0
+    
     ae_comp = 0
     lens_pos = 150
     lens_min = 0
@@ -105,10 +106,7 @@ with dai.Device(pipeline) as dev:
 
             # Send new cfg to camera
             cfg = dai.ImageManipConfig()
-#            cfg.setCropRect(crop_x, crop_y, 0, 0)
             configQueue.send(cfg)
-#            print('Sending new crop - x: ', crop_x, ' y: ', crop_y)
-
         stillFrames = stillQueue.tryGetAll()
         for stillFrame in stillFrames:
             # Decode JPEG
@@ -126,6 +124,25 @@ with dai.Device(pipeline) as dev:
             ctrl = dai.CameraControl()
             ctrl.setCaptureStill(True)
             controlQueue.send(ctrl)
+        elif key == ord('t'):
+            print("Autofocus trigger (and disable continuous)")
+            ctrl = dai.CameraControl()
+            ctrl.setAutoFocusMode(dai.CameraControl.AutoFocusMode.AUTO)
+            ctrl.setAutoFocusTrigger()
+            controlQueue.send(ctrl)
+        elif key == ord('d'):
+            print("Autofocus EDOF mode")
+            ctrl = dai.CameraControl()
+            ctrl.setAutoFocusMode(dai.CameraControl.AutoFocusMode.EDOF)
+            controlQueue.send(ctrl)
+        elif key in [ord(','), ord('.')]:
+            if key == ord(','): lens_pos -= LENS_STEP
+            if key == ord('.'): lens_pos += LENS_STEP
+            lens_pos = clamp(lens_pos, lens_min, lens_max)
+            print("Setting manual focus, lens position:", lens_pos)
+            ctrl = dai.CameraControl()
+            ctrl.setManualFocus(lens_pos)
+            controlQueue.send(ctrl)
         elif key == ord('w'):
         	#circle between white balances
             if awb_lock == False:
@@ -139,15 +156,18 @@ with dai.Device(pipeline) as dev:
                 controlQueue.send(ctrl)
             else: 	
                 print('AutoWhite balance locked')	
-        elif key == ord('+') or key == ord('-'):
-        	#set exposure compensation between -9,9 in stops of 1
+        elif key in [ord('i'), ord('o'), ord('k'), ord('l')]:
+            #set exposure compensation between -9,9 in stops of 1
             if ae_lock == False:
-                if key == ord('+'):  ae_comp+=1
-                elif key == ord('-'): ae_comp-=1
-                ae_comp=clamp(ae_comp,-9,9)
-                print('Autoexposure compensation: ', ae_comp)
-                ctrl=dai.CameraControl()
-                ctrl.setAutoExposureCompensation(ae_comp)
+                if key == ord('i'): exp_time -= EXP_STEP
+                if key == ord('o'): exp_time += EXP_STEP
+                if key == ord('k'): sens_iso -= ISO_STEP
+                if key == ord('l'): sens_iso += ISO_STEP
+                exp_time = clamp(exp_time, exp_min, exp_max)
+                sens_iso = clamp(sens_iso, sens_min, sens_max)
+                print("Setting manual exposure, time:", exp_time, "iso:", sens_iso)
+                ctrl = dai.CameraControl()
+                ctrl.setManualExposure(exp_time, sens_iso)
                 controlQueue.send(ctrl)
             else:
                 print('exposure Locked')
@@ -163,4 +183,7 @@ with dai.Device(pipeline) as dev:
             #save EV and WB values
             #tmp = TemporaryFile(mode="a+b")
             print('Calibration file "RGB_calib.npz" was saved')
-            np.savez('RGB_calib', ae_comp=ae_comp, awbMode=dai.RawCameraControl.AutoWhiteBalanceMode(default_wb))
+            np.savez('RGB_calib', lens_pos=lens_pos,\
+                exp_time=exp_time,sens_iso=sens_iso, \
+                awbMode=dai.RawCameraControl.AutoWhiteBalanceMode(default_wb),\
+                afMode=dai.CameraControl.AutoFocusMode.EDOF)
