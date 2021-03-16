@@ -3,7 +3,7 @@
 Run this command line in your terminal
 
 ```bash
-!python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ### Upload process
