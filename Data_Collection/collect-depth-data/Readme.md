@@ -27,3 +27,7 @@ Mono camera has no focus control, so in any case wait for 100 frames for the cam
 
 Will save the disparity maps and the same maps conv to depth arrays (.npy) in the specified directory. Modified from the gen2-camera-demo script on depthai-experiments. 
 
+### 03_save_video.py 
+
+same procedure as 02. 
+videos saved as 720p encoded h264 (mono) and 4K encoded (h265) color in savepath. Need to convert to mp4 using ffmpeg. Commands to come up after pressing ctrl+c in the script. 
