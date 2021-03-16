@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import time
 from skimage import morphology
 import matplotlib.patches as patches
+import glob
 
 
 # TODO: Find principal bbox from multiple 
@@ -80,7 +81,7 @@ def reduce_holes(mask, kernel_size, min_object_size, min_hole_size, iterations, 
     cleaned_mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, (7,7))
     return cleaned_mask
 
-def create_foreground(img, mask):
+def create_foreground(img, mask, add_padding=False):
     # applys mask to create RGBA foreground using PIL
     
     if len(np.array(mask).shape) == 3:
@@ -91,8 +92,13 @@ def create_foreground(img, mask):
     # extract from image using mask
     rgba[:, :, 3][mask[:,:]==0] = 0
     foreground = Image.fromarray(rgba)
-    # crop foreground to content    
-    pil_crop_frground = foreground.crop(foreground.getbbox())
+    # crop foreground to content
+    
+    if add_padding:    
+        pil_crop_frground = foreground.crop((foreground.getbbox()[0] - 3,foreground.getbbox()[1] - 3, foreground.getbbox()[2] + 3, foreground.getbbox()[3] + 3 ))
+    else:
+        pil_crop_frground = foreground.crop(foreground.getbbox())
+    
     return pil_crop_frground
 
 def filter_by_concomponents(mask, top_n):
@@ -225,8 +231,6 @@ def extract_from_bbox(img_bbox_pairs, exg_thresh,
                 
                 bbox_colors = random.sample(colors, len(i['bboxes']))
                 color = bbox_colors[color_id_num]
-
-
 
 
                 # Create a Rectangle patch
@@ -369,3 +373,8 @@ def non_max_suppression(prediction, conf_thres=0.5, nms_thres=0.4):
             output[image_i] = torch.stack(keep_boxes)
 
     return output
+
+def get_images(img_dir):
+    img_list = glob.glob(img_dir + "/*.jpeg")
+
+    return img_list
