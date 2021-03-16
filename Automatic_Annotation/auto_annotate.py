@@ -4,16 +4,16 @@ import numpy as np
 import os
 
 
-img_dir = "/home/admin_mkutugata/Desktop/opencv_data_local/raw/06_data_2"
+img_dir = "./raw/06_data_2"
 
-save_frgd_dir = "/home/admin_mkutugata/Desktop/opencv_data_local/annotate_output/foregrounds/06_data_2/"
+save_frgd_dir = "./annotate_output/foregrounds/06_data_2/"
 
 imgs = get_images(img_dir)
-imgs = sorted(imgs, reverse=True)
+# imgs = sorted(imgs, reverse=True)
 
 # For testing
-# num_test_imgs = 3
-# imgs = random.sample(imgs, num_test_imgs)
+num_test_imgs = 3
+imgs = random.sample(imgs, num_test_imgs)
 
 exg_thresh = 0
 
