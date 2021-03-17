@@ -107,4 +107,5 @@ with dai.Device(pipeline) as device:
             ctrl.setAutoExposureEnable()
             controlQueue.send(ctrl)
         elif key == ord('s'):
+            print('Calibration file "mono_calib.npz" was saved')
             np.savez('mono_calib', exp_time=exp_time, sens_iso=sens_iso)

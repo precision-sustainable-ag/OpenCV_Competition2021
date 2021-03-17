@@ -7,6 +7,7 @@ from time import sleep
 import datetime
 import argparse
 import os
+from pathlib import Path
 '''
 If one or more of the additional depth modes (lrcheck, extended, subpixel)
 are enabled, then:
@@ -18,16 +19,21 @@ Otherwise, depth output is U16 (mm) and median is functional.
 But like on Gen1, either depth or disparity has valid data. TODO enable both.
 '''
 parser = argparse.ArgumentParser()
-parser.add_argument("-sp", "--savepath", default='/home/sardesaim/collected_depth/', help="output path for depth data")
+parser.add_argument("-sp", "--savepath", default='/home/pi/collected_depth/', help="output path for depth data")
 parser.add_argument("-n", "--numframes", default=5, help="Number of frames to be saved")
 parser.add_argument("-d", "--depthrgb", default='d', help="Capture Depth images (d) or RGB (r)")
 parser.add_argument("-c","--usecalibration", default=True, help="Use calibrated parameters for 3A for both cameras")
 parser.add_argument("-f","--focusMode", default=5, help="Focus Modes. Enter exactly from [0:'MANUAL',1:'AUTO',3:'CONTINUOUS_VIDEO',4:'CONTINUOUS_PICTURE',5:'EDOF']")
-parser.add_argument("-mc", "--calibrationfilemono", default='/home/sardesaim/OpenCV_Competition2021/Data_Collection/collect-depth-data/mono_calib.npz')
-parser.add_argument("-rc", "--calibrationfilergb", default='/home/sardesaim/OpenCV_Competition2021/Data_Collection/collect-depth-data/RGB_calib.npz')
+parser.add_argument("-mc", "--calibrationfilemono", default='/home/pi/mono_calib.npz')
+parser.add_argument("-rc", "--calibrationfilergb", default='/home/pi/RGB_calib.npz')
 args = parser.parse_args()
-if not os.path.exists(args.savepath):
-    os.makedirs(args.savepath)
+#if not os.path.exists(args.savepath):
+#    os.makedirs(args.savepath)
+
+dest = Path(args.savepath).resolve().absolute()
+if dest.exists() and len(list(dest.glob('*'))) != 0 and not args.dirty:
+    raise ValueError(f"Path {dest} contains {len(list(dest.glob('*')))} files. Either specify new path or use \"--dirty\" flag to use current one")
+dest.mkdir(parents=True, exist_ok=True)
 
 n=args.numframes
 sp=args.savepath
@@ -42,9 +48,9 @@ source_camera  = not False
 out_depth      = False  # Disparity by default
 out_rectified  = True   # Output and display rectified streams
 lrcheck  = True   # Better handling for occlusions
-extended = False  # Closer-in minimum depth, disparity range is doubled 
+extended = False  # Closer-in minimum depth, disparity range is doubled
 subpixel = True   # Better accuracy for longer distance, fractional disparity 32-levels
-# Options: MEDIAN_OFF, KERNEL_3x3, KERNEL_5x5, KERNEL_7x7 
+# Options: MEDIAN_OFF, KERNEL_3x3, KERNEL_5x5, KERNEL_7x7
 median   = dai.StereoDepthProperties.MedianFilter.KERNEL_7x7
 
 # Sanitize some incompatible options
@@ -70,7 +76,7 @@ def create_rgb_cam_pipeline():
     control_in.setStreamName('control_r')
     xout_preview = pipeline.createXLinkOut()
     xout_video   = pipeline.createXLinkOut()
-    
+
 
     cam.setPreviewSize(540, 540)
     cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
@@ -102,12 +108,12 @@ def create_stereo_depth_pipeline(from_camera=True):
     else:
         cam_left      = pipeline.createXLinkIn()
         cam_right     = pipeline.createXLinkIn()
-    
+
     control_in = pipeline.createXLinkIn()
     control_in.setStreamName('control_m')
     control_in.out.link(cam_left.inputControl)
     control_in.out.link(cam_right.inputControl)
-    
+
     stereo            = pipeline.createStereoDepth()
     xout_left         = pipeline.createXLinkOut()
     xout_right        = pipeline.createXLinkOut()
@@ -187,7 +193,7 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
         yuv = np.array(data).reshape((h * 3 // 2, w)).astype(np.uint8)
         frame = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_NV12)
         if disp_frame_count>100:
-            cv2.imwrite(sp+'rgb'+str(disp_frame_count-100)+'.png', frame)
+            cv2.imwrite(str(dest)+'/'+'rgb'+str(disp_frame_count-100)+'.png', frame)
     elif name == 'depth':
         # TODO: this contains FP16 with (lrcheck or extended or subpixel)
         frame = np.array(data).astype(np.uint8).view(np.uint16).reshape((h, w))
@@ -198,9 +204,9 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
         # Compute depth from disparity (32 levels)
         with np.errstate(divide='ignore'): # Should be safe to ignore div by zero here
             depth = (disp_levels * baseline * focal / disp).astype(np.uint16)
-            #save depth frame as np array 
+            #save depth frame as np array
             if disp_frame_count>100:
-                np.save(sp+'depth'+str(disp_frame_count-100)+'.npy', depth)
+                np.save(str(dest)+'/'+'depth'+str(disp_frame_count-100)+'.npy', depth)
         if 1: # Optionally, extend disparity range to better visualize it
             frame = (disp * 255. / max_disp).astype(np.uint8)
 
@@ -209,17 +215,17 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
             #frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
             #save frame as jpg
             if disp_frame_count>100:
-                cv2.imwrite(sp+'disp_map'+str(disp_frame_count-100)+'.png', frame)
+                cv2.imwrite(str(dest)+'/'+'disp_map'+str(disp_frame_count-100)+'.png', frame)
     else: # mono streams / single channel
         frame = np.array(data).reshape((h, w)).astype(np.uint8)
         if name.startswith('rectified_'):
             frame = cv2.flip(frame, 1)
             if disp_frame_count>100:
-                cv2.imwrite(sp+'rect_left'+str(disp_frame_count-100)+'.png', frame)
+                cv2.imwrite(str(dest)+'/'+'rect_left'+str(disp_frame_count-100)+'.png', frame)
         if name == 'rectified_right':
             last_rectif_right = frame
             if disp_frame_count>100:
-                cv2.imwrite(sp+'rect_right'+str(disp_frame_count-100)+'.png', last_rectif_right)
+                cv2.imwrite(str(dest)+'/'+'rect_right'+str(disp_frame_count-100)+'.png', last_rectif_right)
     return frame,disp_frame_count
 
 def test_pipeline():
@@ -252,7 +258,7 @@ def test_pipeline():
             if focus_mode==0:
                 ctrl1.setManualFocus(lens_pos_color)
             else:
-                ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(focus_mode))
+                ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(int(focus_mode)))
             controlQueue_r.send(ctrl1)
         # Create a receive queue for each stream
         q_list = []
@@ -272,9 +278,9 @@ def test_pipeline():
                 if name in ['left', 'right', 'depth']: continue
                 frame,disp_frame_count = convert_to_cv2_frame(name, image,disp_frame_count)
                 cv2.imshow(name, frame)
-                if disp_frame_count>=n+100:
+                if disp_frame_count>=(int(n)+100):
                     break
-            if disp_frame_count>=n+100:
+            if disp_frame_count>=(int(n)+100):
                 break
             if cv2.waitKey(1) == ord('q'):
                 break
