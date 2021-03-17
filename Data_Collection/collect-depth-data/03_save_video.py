@@ -119,7 +119,7 @@ with dai.Device(pipeline) as dev:
                 break
 
     print("To view the encoded data, convert the stream file (.h264/.h265) into a video file (.mp4), using commands below:")
-    cmd = "ffmpeg -framerate 25 -i {} -c copy {}"
-    print(cmd.format('"'+str(dest)+'/'+'mono1.h264'+'"', '"'+str(dest)+'/'+'mono1.mp4'+'"'))
-    print(cmd.format('"'+str(dest)+'/'+'mono2.h264'+'"', '"'+str(dest)+'/'+'mono2.mp4'+'"'))
-    print(cmd.format('"'+str(dest)+'/'+'color.h264'+'"', '"'+str(dest)+'/'+'color.mp4'+'"'))
+    #cmd = "ffmpeg -framerate 25 -i {} -c copy {}"
+    #print(cmd.format('"'+str(dest)+'/'+'mono1.h264'+'"', '"'+str(dest)+'/'+'mono1.mp4'+'"'))
+    #print(cmd.format('"'+str(dest)+'/'+'mono2.h264'+'"', '"'+str(dest)+'/'+'mono2.mp4'+'"'))
+    #print(cmd.format('"'+str(dest)+'/'+'color.h264'+'"', '"'+str(dest)+'/'+'color.mp4'+'"'))
