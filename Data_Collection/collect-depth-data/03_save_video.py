@@ -2,14 +2,20 @@
 import depthai as dai
 import argparse
 import numpy as np
+from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-sp", "--savepath", default='/home/sardesaim/collected_depth/', help="output path for depth data")
 parser.add_argument("-c","--usecalibration", default=True, help="Use calibrated parameters for 3A for both cameras")
 parser.add_argument("-f","--focusMode", default=3, help="Focus Modes. Enter exactly from [0:'MANUAL',1:'AUTO',3:'CONTINUOUS_VIDEO',4:'CONTINUOUS_PICTURE',5:'EDOF']")
-parser.add_argument("-mc", "--calibrationfilemono", default='/home/sardesaim/OpenCV_Competition2021/Data_Collection/collect-depth-data/mono_calib.npz')
-parser.add_argument("-rc", "--calibrationfilergb", default='/home/sardesaim/OpenCV_Competition2021/Data_Collection/collect-depth-data/RGB_calib.npz')
+parser.add_argument("-mc", "--calibrationfilemono", default='/home/pi/mono_calib.npz')
+parser.add_argument("-rc", "--calibrationfilergb", default='/home/pi/RGB_calib.npz')
 args = parser.parse_args()
+
+dest = Path(args.savepath).resolve().absolute()
+if dest.exists() and len(list(dest.glob('*'))) != 0 and not args.dirty:
+    raise ValueError(f"Path {dest} contains {len(list(dest.glob('*')))} files. Either specify new path or use \"--dirty\" flag to use current one")
+dest.mkdir(parents=True, exist_ok=True)
 
 sp=args.savepath
 
@@ -87,16 +93,16 @@ with dai.Device(pipeline) as dev:
         controlQueue_r = dev.getInputQueue('control_r')
         ctrl1 = dai.CameraControl()
         ctrl1.setManualExposure(exp_time_color, sens_iso_color)
-        if focus_mode==0:
+        if int(focus_mode)==0:
             ctrl1.setManualFocus(lens_pos_color)
         else:
-            ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(focus_mode))
+            ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(int(focus_mode)))
         controlQueue_r.send(ctrl1)
     # Start the pipeline
     dev.startPipeline()
-    
+
     # Processing loop
-    with open(sp+'mono1.h264', 'wb') as file_mono1_h264, open(sp+'color.h265', 'wb') as file_color_h265, open(sp+'mono2.h264', 'wb') as file_mono2_h264:
+    with open(str(dest)+'/'+'mono1.h264', 'wb') as file_mono1_h264, open(str(dest)+'/'+'color.h265', 'wb') as file_color_h265, open(str(dest)+'/'+'mono2.h264', 'wb') as file_mono2_h264:
         print("Press Ctrl+C to stop encoding...")
         while True:
             try:
@@ -114,6 +120,6 @@ with dai.Device(pipeline) as dev:
 
     print("To view the encoded data, convert the stream file (.h264/.h265) into a video file (.mp4), using commands below:")
     cmd = "ffmpeg -framerate 25 -i {} -c copy {}"
-    print(cmd.format(sp+"mono1.h264", sp+"mono1.mp4"))
-    print(cmd.format(sp+"mono2.h264", sp+"mono2.mp4"))
-    print(cmd.format(sp+"color.h265", sp+"color.mp4"))
+    print(cmd.format('"'+str(dest)+'/'+'mono1.h264'+'"', '"'+str(dest)+'/'+'mono1.mp4'+'"'))
+    print(cmd.format('"'+str(dest)+'/'+'mono2.h264'+'"', '"'+str(dest)+'/'+'mono2.mp4'+'"'))
+    print(cmd.format('"'+str(dest)+'/'+'color.h264'+'"', '"'+str(dest)+'/'+'color.mp4'+'"'))
