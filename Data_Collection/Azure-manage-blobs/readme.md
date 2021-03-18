@@ -12,7 +12,7 @@ python3 -m pip install requirements.txt
 python3 blob_upload.py <path1> <path2> <path3> <path4> ... <or_particular_image/video>
 ```
 
-Where <path> is the directory of images/videos you would like to upload. Use this format.
+Where <path> is the directory containing multiple subfolders which contain images/videos you would like to upload. Use this format.
 
 ```bash
 python3 blob_upload.py \
