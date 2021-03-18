@@ -192,8 +192,8 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
         disp_frame_count+=1
         yuv = np.array(data).reshape((h * 3 // 2, w)).astype(np.uint8)
         frame = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_NV12)
-        if disp_frame_count>100:
-            cv2.imwrite(str(dest)+'/'+'rgb'+str(disp_frame_count-100)+'.png', frame)
+        if disp_frame_count>50:
+            cv2.imwrite(str(dest)+'/'+'rgb'+str(disp_frame_count-50)+'.png', frame)
     elif name == 'depth':
         # TODO: this contains FP16 with (lrcheck or extended or subpixel)
         frame = np.array(data).astype(np.uint8).view(np.uint16).reshape((h, w))
@@ -205,8 +205,8 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
         with np.errstate(divide='ignore'): # Should be safe to ignore div by zero here
             depth = (disp_levels * baseline * focal / disp).astype(np.uint16)
             #save depth frame as np array
-            if disp_frame_count>100:
-                np.save(str(dest)+'/'+'depth'+str(disp_frame_count-100)+'.npy', depth)
+            if disp_frame_count>50:
+                np.save(str(dest)+'/'+'depth'+str(disp_frame_count-50)+'.npy', depth)
         if 1: # Optionally, extend disparity range to better visualize it
             frame = (disp * 255. / max_disp).astype(np.uint8)
 
@@ -214,18 +214,18 @@ def convert_to_cv2_frame(name, image,disp_frame_count):
             frame = cv2.applyColorMap(frame, cv2.COLORMAP_HOT)
             #frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
             #save frame as jpg
-            if disp_frame_count>100:
-                cv2.imwrite(str(dest)+'/'+'disp_map'+str(disp_frame_count-100)+'.png', frame)
+            if disp_frame_count>50:
+                cv2.imwrite(str(dest)+'/'+'disp_map'+str(disp_frame_count-50)+'.png', frame)
     else: # mono streams / single channel
         frame = np.array(data).reshape((h, w)).astype(np.uint8)
         if name.startswith('rectified_'):
             frame = cv2.flip(frame, 1)
-            if disp_frame_count>100:
-                cv2.imwrite(str(dest)+'/'+'rect_left'+str(disp_frame_count-100)+'.png', frame)
+            if disp_frame_count>50:
+                cv2.imwrite(str(dest)+'/'+'rect_left'+str(disp_frame_count-50)+'.png', frame)
         if name == 'rectified_right':
             last_rectif_right = frame
-            if disp_frame_count>100:
-                cv2.imwrite(str(dest)+'/'+'rect_right'+str(disp_frame_count-100)+'.png', last_rectif_right)
+            if disp_frame_count>50:
+                cv2.imwrite(str(dest)+'/'+'rect_right'+str(disp_frame_count-50)+'.png', last_rectif_right)
     return frame,disp_frame_count
 
 def test_pipeline():
@@ -277,10 +277,10 @@ def test_pipeline():
                 # Skip some streams for now, to reduce CPU load
                 if name in ['left', 'right', 'depth']: continue
                 frame,disp_frame_count = convert_to_cv2_frame(name, image,disp_frame_count)
-                cv2.imshow(name, frame)
-                if disp_frame_count>=(int(n)+100):
+                #cv2.imshow(name, frame)
+                if disp_frame_count>=(int(n)+50):
                     break
-            if disp_frame_count>=(int(n)+100):
+            if disp_frame_count>=(int(n)+50):
                 break
             if cv2.waitKey(1) == ord('q'):
                 break
