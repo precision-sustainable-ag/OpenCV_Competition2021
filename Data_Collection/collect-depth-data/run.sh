@@ -134,7 +134,7 @@ python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$(date +"%Y_
 python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$(date +"%Y_%m_%d_%H_%M_%S") \
 -n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 video_relative_move.py
+#python3 video_relative_move.py
 
 #python3 03_save_video.py -sp /home/pi/collected_data/week1/$(date +"%Y_%m_%d_%H_%M_%S") \
 # -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
