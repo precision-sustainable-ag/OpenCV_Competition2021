@@ -86,17 +86,3 @@ for imgp in tqdm(imgs):
         # Extract and save foregrounds
         exg_frgd = extract_save_ind_frgrd(img,top_masks, imgp,opt.save_foreground_dir,testing=opt.testing)
 
-        plt.figure(figsize=(28, 20))
-        # plt.suptitle("ExG Mask", fontsize=48)
-        plt.subplot(231); plt.imshow(img);plt.title('Original Image', fontsize=38)
-        plt.subplot(232); plt.imshow(exg_mask); plt.title("ExG Mask",fontsize=38)
-        plt.subplot(233); plt.imshow(equ_exg_mask);plt.title('CLAHE Equalized ExG', fontsize=38)
-        plt.subplot(234); plt.imshow(exg_th3); plt.title("Otsu Thresholding",fontsize=38)
-        plt.subplot(235); plt.imshow(top_masks[4]);plt.title('1 of n top masks', fontsize=38)
-        plt.subplot(236); plt.imshow(exg_frgd);plt.title('1 of n foregrounds', fontsize=38); plt.axis('off')
-
-        plt.tight_layout()
-
-        plt.savefig(opt.save_foreground_dir + "/" +str(frgd_id) + "Figure.png")
-        plt.close()
-        frgd_id +=1 
