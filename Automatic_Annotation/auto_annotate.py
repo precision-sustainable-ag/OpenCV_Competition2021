@@ -1,59 +1,88 @@
+import argparse
 from veg_utils import *
 import random
-import numpy as np
-import os
+import cv2
+from tqdm import tqdm
+
+"""
+Creates PNG foreground images by extracting vegation using extended green 
+vegetation index and contrast limiting adaptive histogram equalization. User must define 
+the number of largest components (top_n) to extract from image set. 
+Individual components will be saved us'ing original image name appended 
+with number to represent n component. If object detection can is applied to
+localize vegetation, top_n will be ignored.  
 
 
-img_dir = "./raw/06_data_2"
+Written by: Matthew Kutugata
+Last updated: March 28th, 2021
+"""
 
-save_frgd_dir = "./annotate_output/foregrounds/06_data_2/"
+parser = argparse.ArgumentParser()
+parser.add_argument('--image_dir', type=str, required=True, help='image directory')
+parser.add_argument('--save_foreground_dir', type=str, default='output/foregrounds', help='directory to save foregrounds')  # file/folder, 0 for webcam
+parser.add_argument('--top_n', type=int, default=3, help='inference size (pixels)')
+parser.add_argument('--exg_thresh', type=float, default=0, help='object confidence threshold')
+parser.add_argument('--testing', action='store_true', help='view output of sample foregrounds and original image')
+parser.add_argument('--num_test_imgs', type=int, default=3, help='number of testing images')
+parser.add_argument('--use_detection', action='store_true', help='use object detection to localize target vegetation, top_n will be ignored')
 
-imgs = get_images(img_dir)
-# imgs = sorted(imgs, reverse=True)
+opt = parser.parse_args()
 
-# For testing
-num_test_imgs = 3
-imgs = random.sample(imgs, num_test_imgs)
+# Returns list of images of multiple files types
+imgs = get_images(opt.image_dir)
 
-exg_thresh = 0
-
-save_frgds = True
-
+# For testing and viewing examples
+if opt.testing:
+    imgs = random.sample(imgs, opt.num_test_imgs)
+else:
+    imgs = sorted(imgs, reverse=True)
 frgd_id = 0
-for imgp in imgs:
+for imgp in tqdm(imgs):
+    
     # Read in image
-    img = cv2.imread(imgp)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # Create ExG mask
-    exg_mask = make_exg(img) # TODO: 'make_exr' or 'make_ndi' options
-    exg_mask = np.where(exg_mask < exg_thresh, 0, exg_mask).astype('uint8') # Thresholding removes low negative values
+    img_bgr = cv2.imread(imgp)
+    img = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     
-    # Create a CLAHE object (Arguments are optional).
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))            
-    clahe_exg = clahe.apply(exg_mask)
-    
-    # Otsu's Thresholding
-    ex_blur = cv2.GaussianBlur(clahe_exg, (5,5),0).astype('uint8')
-    ret3,exg_th3 = cv2.threshold(ex_blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-    
-    # Get top N component
-    top_mask = filter_by_concomponents(exg_th3, 2)
-    
-    # Crop image using mask to create RGBA foreground (optional: 3 px padding)
-    exg_frgd = create_foreground(img, top_mask, add_padding=True)
+    if opt.use_detection:
+        # Get detection labels (bboxes) for individual image
+        label_path = vegimg2label_path(imgp)
+        if label_path:
+            # Extract list of bbox coordinates in xyxy
+            bboxes = extract_boxes(label_path, img.shape)
+            bboxes = xywh_2_xyxy(bboxes, img.shape)
+            detection_id = 0
+            for box in bboxes:
+                box = [int(item) for item in box]
+                x1, y1, x2, y2 = box[0], box[1], box[2], box[3]
+                if box_area(box) < 5000:
+                    continue
+                detection_img = img[y1:y2, x1:x2]
+                if detection_img.shape[0] == 0 or detection_img.shape[1] == 0:
+                    continue
+                # Create ExG mask
+                exg_mask = make_exg(detection_img, exg_thresh=True)
+                # Contrast limiting adaptive histogram equalization (CLAHE)
+                equ_exg_mask = CLAHE_hist(exg_mask)
+                # Otsu's thresh
+                exg_th3 = otsu_thresh(equ_exg_mask)
+                # Extract and save foregrounds
+                exg_frgd = create_foreground(detection_img, exg_th3, add_padding=True)     
+                if not os.path.exists(opt.save_foreground_dir):
+                    os.makedirs(opt.save_foreground_dir)
+                fname_prefix = os.path.splitext(os.path.basename(imgp))[0]
+                frgd_path = os.path.join(opt.save_foreground_dir, fname_prefix + "_" + "detection_" + str(detection_id) + ".png" )
+                exg_frgd.save(frgd_path)
+                detection_id += 1
 
-    if save_frgds:
-
-        if not os.path.exists(save_frgd_dir):
-            os.makedirs(save_frgd_dir)
-
-        fname_prefix = os.path.splitext(os.path.basename(imgp))[0]
-
-        frgd_path = os.path.join(save_frgd_dir, fname_prefix + "_" + str(frgd_id) + ".png" )
-        exg_frgd.save(frgd_path)
-        frgd_id += 1
-
-
-
-
+    else:
+        # Create ExG mask
+        exg_mask = make_exg(img, exg_thresh=True)
+        # Contrast limiting adaptive histogram equalization (CLAHE)
+        equ_exg_mask = CLAHE_hist(exg_mask)
+        # Otsu's thresh
+        exg_th3 = otsu_thresh(equ_exg_mask)
+        # Get list of top N components
+        top_masks = filter_by_componenet_size(exg_th3,opt.top_n)
+        # Extract and save foregrounds
+        exg_frgd = extract_save_ind_frgrd(img,top_masks, imgp,opt.save_foreground_dir,testing=opt.testing)
 
