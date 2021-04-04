@@ -140,7 +140,7 @@ python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$(date +"%Y_
 # -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 #Added by Artem, please verify. Changing the sleep interval may be necessary
 python3 /home/pi/mm_control.py -hm &
-sleep 1s && python3 03_save_video.py -sp /home/pi/collected_data/week1/$(date +"%Y_%m_%d_%H_%M_%S") \ -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz &
+sleep 1s && python3 03_save_video.py -sp /home/pi/collected_data/week1/$(date +"%Y_%m_%d_%H_%M_%S") -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz &
 
 
 
