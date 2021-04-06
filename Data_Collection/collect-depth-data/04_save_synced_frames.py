@@ -221,7 +221,7 @@ def store_frames(in_q):
         frames_path.mkdir(parents=False, exist_ok=False)
         for stream_name, item in frames_dict.items():
             if stream_name=="disparity":
-                disp=item.astype(uint8)
+                disp=item.astype(np.uint8)
                 depth=(disp_levels * baseline * focal / disp).astype(np.uint16)
                 np.save(str(frames_path / Path(f"{stream_name}.npy")), depth)
                 dispmap = (disp * 255. / max_disp).astype(np.uint8)
