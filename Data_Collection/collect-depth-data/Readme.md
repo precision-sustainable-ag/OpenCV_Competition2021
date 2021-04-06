@@ -36,3 +36,9 @@ videos saved as 720p encoded h264 (mono) and 4K encoded (h265) color in savepath
 
 Run script using.
 02_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
+
+### 05_rgb_preview.py 
+
+Run script using.
+05_rgb_preview.py 
+quit pressing "q" or ctrl+c into the terminal
