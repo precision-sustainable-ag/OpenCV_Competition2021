@@ -221,11 +221,13 @@ def store_frames(in_q):
         frames_path.mkdir(parents=False, exist_ok=False)
         for stream_name, item in frames_dict.items():
             if stream_name=="disparity":
-                disp=item
+                disp=item.astype(uint8)
                 depth=(disp_levels * baseline * focal / disp).astype(np.uint16)
                 np.save(str(frames_path / Path(f"{stream_name}.npy")), depth)
                 dispmap=cv2.applyColorMap(item, cv2.COLORMAP_JET)
                 cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), dispmap)
+            else:
+                cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), item)
 
 store_p = Process(target=store_frames, args=(frame_q, ))
 store_p.start()
