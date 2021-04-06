@@ -225,7 +225,7 @@ def store_frames(in_q):
                 depth=(disp_levels * baseline * focal / disp).astype(np.uint16)
                 np.save(str(frames_path / Path(f"{stream_name}.npy")), depth)
                 dispmap = (disp * 255. / max_disp).astype(np.uint8)
-                dispmap=cv2.applyColorMap(dispmap, cv2.COLORMAP_JET)
+                dispmap=cv2.applyColorMap(dispmap, cv2.COLORMAP_HOT)
                 cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), dispmap)
             else:
                 cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), item)
