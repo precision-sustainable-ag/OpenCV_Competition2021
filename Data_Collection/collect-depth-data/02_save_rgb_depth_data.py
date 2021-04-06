@@ -237,8 +237,6 @@ def test_pipeline():
     if use_calibration:
         exp_time_mono=calib_mono['exp_time']
         sens_iso_mono=calib_mono['sens_iso']
-        exp_time_mono=calib_mono['exp_time']
-        sens_iso_mono=calib_mono['sens_iso']
         exp_time_color=calib_color['exp_time']
         sens_iso_color=calib_color['sens_iso']
         lens_pos_color=calib_color['lens_pos']
