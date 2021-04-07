@@ -42,3 +42,5 @@ Run script using.
 Run script using.
 05_rgb_preview.py 
 quit pressing "q" or ctrl+c into the terminal
+
+use --help argument to go to help menu of any script. 
