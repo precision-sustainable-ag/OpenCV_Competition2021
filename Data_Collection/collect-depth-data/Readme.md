@@ -32,10 +32,10 @@ Will save the disparity maps and the same maps conv to depth arrays (.npy) in th
 same procedure as 02. 
 videos saved as 720p encoded h264 (mono) and 4K encoded (h265) color in savepath. Need to convert to mp4 using ffmpeg. Commands to come up after pressing ctrl+c in the script. 
 
-### 04_save_rgb_depth_data.py 
+### 04_save_synced_frames.py 
 
 Run script using.
-02_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
+04_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode_using_full_strings> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
 
 ### 05_rgb_preview.py 
 
