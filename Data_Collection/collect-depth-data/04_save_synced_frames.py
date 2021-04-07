@@ -49,7 +49,8 @@ if use_calibration:
     exp_time_color=calib_color['exp_time']
     sens_iso_color=calib_color['sens_iso']
     exposure_color=[exp_time_color,sens_iso_color]
-    manual_focus=calib_color['lens_pos']
+    #manual_focus=calib_color['lens_pos']
+    #whitebalance=calib_color['awbMode']
 
 # Depth parameters
 out_rectified  = True   # Output and display rectified streams
@@ -59,7 +60,7 @@ subpixel = True   # Better accuracy for longer distance, fractional disparity 32
 # Options: MEDIAN_OFF, KERNEL_3x3, KERNEL_5x5, KERNEL_7x7
 median   = dai.StereoDepthProperties.MedianFilter.KERNEL_7x7
 
-# Camera parameters 
+# Camera parameters
 right_intrinsic = [[860.0, 0.0, 640.0], [0.0, 860.0, 360.0], [0.0, 0.0, 1.0]]
 baseline = 27 #mm
 focal = right_intrinsic[0][0]
@@ -212,7 +213,7 @@ frame_q = Queue()
 
 
 def store_frames(in_q):
-    
+
     while True:
         frames_dict = in_q.get()
         if frames_dict is None:
@@ -245,7 +246,8 @@ with dai.Device(pipeline) as device:
             ctrl.setAutoFocusMode(getattr(dai.CameraControl.AutoFocusMode, args.autofocus))
         if all(exposure_color):
             ctrl.setManualExposure(*exposure_color)
-            ctrl.setManualFocus(manual_focus)
+            #ctrl.setManualFocus(manual_focus)
+            ctrl.setAutoWhiteBalanceMode(dai.RawCameraControl.AutoWhiteBalanceMode(8))
         qControlRGB.send(ctrl)
 
         qControlMono = device.getInputQueue('control_mono')
