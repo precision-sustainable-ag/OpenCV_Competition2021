@@ -37,173 +37,140 @@ echo "This is the line $number. Stop 1"
 
 echo "Taking data. Position 1"
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop1/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop1/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop1/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop1/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 2"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop2/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop2/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop2/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop2/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 3"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop3/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop3/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop3/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop3/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 4"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop4/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop4/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop4/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop4/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 5"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop5/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop5/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop5/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop5/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 6"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop6/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop6/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop6/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop6/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 7"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop7/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop7/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop7/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop7/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 8"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop8/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop8/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop8/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop8/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 
 echo "Taking data. Position 9"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop9/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop9/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop9/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop9/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 10"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop10/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop10/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop10/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop10/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 11"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 12"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop12/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop12/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop12/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop12/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 13"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop13/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop13/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop13/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop13/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 14"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop14/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop14/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop14/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop14/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 15"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop15/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop15/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop15/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop15/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 16"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop16/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop16/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop16/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop16/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 echo "Taking data. Position 17"
 
 python3 /home/pi/mm_control.py -d 61.25
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop17/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop17/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
-python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop17/$(date +"%Y_%m_%d_%H_%M_%S") \
--n 30 -d d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
+python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop17/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr d -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz
 
 python3 /home/pi/mm_control.py -hm &
 sleep 1s && python3 03_save_video.py -sp /home/pi/collected_data/week1/$number/videos/$(date +"%Y_%m_%d_%H_%M_%S") -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz &
-
+sleep 45s
+sudo killall -9 python3
