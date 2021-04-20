@@ -254,7 +254,7 @@ def test_pipeline():
         elif collecting=='r' and use_calibration:
             controlQueue_r = device.getInputQueue('control_r')
             ctrl1 = dai.CameraControl()
-            ctrl.setAutoExposureEnable()
+            ctrl1.setAutoExposureEnable()
             #ctrl1.setManualExposure(exp_time_color, sens_iso_color)
             if focus_mode==0:
                 ctrl1.setManualFocus(lens_pos_color)
