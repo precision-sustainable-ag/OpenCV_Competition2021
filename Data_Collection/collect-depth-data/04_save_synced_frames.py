@@ -7,6 +7,7 @@ from uuid import uuid4
 from multiprocessing import Process, Queue
 import cv2
 import depthai as dai
+import sys
 
 
 def check_range(min_val, max_val):
@@ -27,7 +28,7 @@ parser.add_argument("-sp", "--savepath", default='/home/pi/collected_depth/', he
 # parser.add_argument("-n", "--numframes", default=5, help="Number of frames to be saved")
 parser.add_argument('-d', '--dirty', action='store_true', default=False, help="Allow the destination path not to be empty")
 parser.add_argument('-nd', '--no-debug', dest="prod", action='store_true', default=False, help="Do not display debug output")
-parser.add_argument('-m', '--time', type=float, default=float("inf"), help="Finish execution after X seconds")
+parser.add_argument('-m', '--time1', type=float, default=float("inf"), help="Finish execution after X seconds")
 parser.add_argument('-af', '--autofocus', type=str, default=None, help="Set AutoFocus mode of the RGB camera", choices=list(filter(lambda name: name[0].isupper(), vars(dai.CameraControl.AutoFocusMode))))
 # parser.add_argument('-mf', '--manualfocus', type=check_range(0, 255), help="Set manual focus of the RGB camera [0..255]")
 # parser.add_argument('-et', '--exposure-time', type=check_range(1, 33000), help="Set manual exposure time of the RGB camera [1..33000]")
@@ -201,19 +202,32 @@ class PairingSystem:
             if key <= self.last_paired_ts:
                 del self.ts_packets[key]
 
+def extract_disp(item):
+    disp = item.getFrame().astype(np.uint8)
+    dispmap = (disp * 255. / max_disp).astype(np.uint8)
+    dispmap = cv2.applyColorMap(dispmap, cv2.COLORMAP_HOT)
+    return dispmap
+
+
+def extract_depth(item):
+    disp = item.getFrame().astype(np.uint8)
+    with np.errstate(divide='ignore'):
+        depth = (disp_levels * baseline * focal / disp).astype(np.uint16)
+    return depth
+
 
 extract_frame = {
     "left": lambda item: item.getCvFrame(),
     "right": lambda item: item.getCvFrame(),
     "color": lambda item: item.getCvFrame(),
-    "disparity": lambda item: item.getFrame(),
+    "disparity": extract_disp,
+    "depth": extract_depth
 }
 
 frame_q = Queue()
 
 
 def store_frames(in_q):
-
     while True:
         frames_dict = in_q.get()
         if frames_dict is None:
@@ -221,15 +235,11 @@ def store_frames(in_q):
         frames_path = dest / Path(str(uuid4()))
         frames_path.mkdir(parents=False, exist_ok=False)
         for stream_name, item in frames_dict.items():
-            if stream_name=="disparity":
-                disp=item.astype(np.uint8)
-                depth=(disp_levels * baseline * focal / disp).astype(np.uint16)
-                np.save(str(frames_path / Path(f"{stream_name}.npy")), depth)
-                dispmap = (disp * 255. / max_disp).astype(np.uint8)
-                dispmap=cv2.applyColorMap(dispmap, cv2.COLORMAP_HOT)
-                cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), dispmap)
+            if stream_name == "depth":
+                np.save(str(frames_path / Path(f"{stream_name}.npy")), item)
             else:
                 cv2.imwrite(str(frames_path / Path(f"{stream_name}.png")), item)
+                print("Saving images", frames_path)
 
 store_p = Process(target=store_frames, args=(frame_q, ))
 store_p.start()
@@ -245,7 +255,8 @@ with dai.Device(pipeline) as device:
         if args.autofocus:
             ctrl.setAutoFocusMode(getattr(dai.CameraControl.AutoFocusMode, args.autofocus))
         if all(exposure_color):
-            ctrl.setManualExposure(*exposure_color)
+            ctrl.setAutoExposureEnable()
+            #ctrl.setManualExposure(*exposure_color)
             #ctrl.setManualFocus(manual_focus)
             ctrl.setAutoWhiteBalanceMode(dai.RawCameraControl.AutoWhiteBalanceMode(8))
         qControlRGB.send(ctrl)
@@ -253,13 +264,17 @@ with dai.Device(pipeline) as device:
         qControlMono = device.getInputQueue('control_mono')
         ctrl1 = dai.CameraControl()
         if all(exposure_mono):
-            ctrl1.setManualExposure(*exposure_mono)
+            ctrl1.setAutoExposureEnable()
+            #ctrl1.setManualExposure(*exposure_mono)
         qControlMono.send(ctrl1)
 
     cfg = dai.ImageManipConfig()
     ctrl = dai.CameraControl()
 
     start_ts = monotonic()
+    for queueName in PairingSystem.seq_streams + PairingSystem.ts_streams:
+        print("Preparing", queueName)
+        #cv2.namedWindow(queueName, cv2.WINDOW_NORMAL)
     while True:
         for queueName in PairingSystem.seq_streams + PairingSystem.ts_streams:
             ps.add_packets(device.getOutputQueue(queueName).tryGetAll(), queueName)
@@ -267,15 +282,18 @@ with dai.Device(pipeline) as device:
         pairs = ps.get_pairs()
         for pair in pairs:
             extracted_pair = {stream_name: extract_frame[stream_name](item) for stream_name, item in pair.items()}
+            extracted_pair["depth"] = extract_frame["depth"](pair["disparity"])
             if not args.prod:
                 for stream_name, item in extracted_pair.items():
-                    cv2.imshow(stream_name, item)
-            frame_q.put(extracted_pair)
+                    print("streamname_pair")#, pair)
+                    #cv2.imshow(stream_name, item)
+            if frame_q.empty():
+                frame_q.put(extracted_pair)
 
         if not args.prod and cv2.waitKey(1) == ord('q'):
             break
-
-        if monotonic() - start_ts > args.time:
+        if monotonic() - start_ts > args.time1:
+            print("time", monotonic() - start_ts)
             break
 
 frame_q.put(None)
