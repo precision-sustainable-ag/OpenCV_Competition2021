@@ -81,18 +81,24 @@ with dai.Device(pipeline) as dev:
     if use_calibration:
         exp_time_mono=calib_mono['exp_time']
         sens_iso_mono=calib_mono['sens_iso']
+        exp_time_mono=calib_mono['exp_time']
+        sens_iso_mono=calib_mono['sens_iso']
         exp_time_color=calib_color['exp_time']
         sens_iso_color=calib_color['sens_iso']
         lens_pos_color=calib_color['lens_pos']
         controlQueue_m = dev.getInputQueue('control_m')
         ctrl = dai.CameraControl()
-        ctrl.setManualExposure(exp_time_mono, sens_iso_mono)
+        #ctrl.setManualExposure(exp_time_mono, sens_iso_mono)
+        ctrl.setAutoExposureEnable()
         controlQueue_m.send(ctrl)
         controlQueue_r = dev.getInputQueue('control_r')
         ctrl1 = dai.CameraControl()
-        ctrl1.setManualExposure(exp_time_color, sens_iso_color)
+        ctrl1.setAutoExposureEnable()
+        #ctrl1.setManualExposure(exp_time_color, sens_iso_color)
         if int(focus_mode)==0:
-            ctrl1.setManualFocus(lens_pos_color)
+            ctrl1.setManualFocus(126)
+            ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(0))
+            print(lens_pos_color)
         else:
             ctrl1.setAutoFocusMode(dai.RawCameraControl.AutoFocusMode(int(focus_mode)))
         controlQueue_r.send(ctrl1)
@@ -116,7 +122,7 @@ with dai.Device(pipeline) as dev:
             except KeyboardInterrupt:
                 break
 
-    print("To view the encoded data, convert the stream file (.h264/.h265) into a video file (.mp4), using commands below:")
+    #print("To view the encoded data, convert the stream file (.h264/.h265) into a video file (.mp4), using commands below:")
     #cmd = "ffmpeg -framerate 25 -i {} -c copy {}"
     #print(cmd.format('"'+str(dest)+'/'+'mono1.h264'+'"', '"'+str(dest)+'/'+'mono1.mp4'+'"'))
     #print(cmd.format('"'+str(dest)+'/'+'mono2.h264'+'"', '"'+str(dest)+'/'+'mono2.mp4'+'"'))

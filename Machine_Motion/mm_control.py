@@ -6,7 +6,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-d', '--distance', type=int, help='Relative distance that the MM has to move')
+parser.add_argument('-d', '--distance', type=float, help='Relative distance that the MM has to move')
 parser.add_argument('-hm', '--home', help='Indicates the MM to go to home', action='store_true')
 args = parser.parse_args()
 
@@ -36,7 +36,7 @@ mm.configAxisDirection(axis, ax_direction)
 print("Axis direction set to " + str(ax_direction))
 
 # Relative Move Parameters
-speed = 50
+speed = 10
 acceleration = 100
 
 # Load Relative Move Parameters
