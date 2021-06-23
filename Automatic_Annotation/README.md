@@ -20,7 +20,7 @@ Manual intervention was needed to identify the proper mask generation technique 
 Morphological operations played an important role in removing unnecessary components and denoising in the masks. These operations varied in sophistication depending on species, growth stage, and lighting, and thus the technique that was used.  For Otsu’s thresholding, morphological operations were used to identify the top 5 largest connected components which were then cropped and denoised. Masks generated using K-means clustering used morphological closing operations to eliminate noise. For images of plants during the early growth stage, mask components that were connected to the border were removed. This was to eliminate unnaturally straight plants edges that could occur if vegetation was not entirely within the image frame. During later growth stages and for some species (i.e. grasses), however, most vegetation extended beyond the image frame and unnatural edges had to be retained. 
 
 ![alt text](assets/opencv_2021.jpg?=raw)
-![alt text](assets/opencv_2021_reducing noise.jpg?=raw)
+![alt text](assets/opencv_2021_reducing nosie.jpg?=raw)
 
 Use in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/precision-sustainable-ag/OpenCV_Competition2021/blob/master/Automatic_Annotation/automatic_annotate.ipynb)
 
