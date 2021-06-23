@@ -36,3 +36,5 @@ Images were collected once for 6 weeks; the first two weeks were used for fine-t
 All code was written in python. Vegetation indices were generated using Numpy, masks were created using a combination of SciKit Learn, OpenCV, and SciKit Image libraries. Images were collected in Maryland and images were organized and annotations were created in Texas.
 
 Use in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/precision-sustainable-ag/OpenCV_Competition2021/blob/master/Automatic_Annotation/automatic_annotate.ipynb)
+
+---
