@@ -2,10 +2,10 @@ import cv2
 from utils import specify_species, make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
 from pathlib import Path
-from scipy import ndimage
-from skimage.segmentation import clear_border, slic
+
+from skimage.segmentation import clear_border
 import skimage.morphology as morphology
-from skimage.morphology import opening, white_tophat # erosion, dilation, closing
+from skimage.morphology import opening, white_tophat
 from skimage.morphology import black_tophat, disk
 
 import itertools
