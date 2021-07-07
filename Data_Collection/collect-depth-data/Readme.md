@@ -1,4 +1,46 @@
-## Please add your code, notebooks, instructions, pipelines and reports.
+
+## Setting up the Raspberry Pi
+
+### Install Python 3 on the RPi (???)
+
+
+### Install the last version of DepthAI
+
+`python3 -m pip install depthai==0.0.2.1+363f8cbae3af93e2b7283913dd82012e234641da --extra-index-url`
+
+### Clone this branch
+
+`git clone https://github.com/luxonis/depthai-python.git --branch gen2_develop`
+
+### Calibrate the oak-d camera
+
+Follow steps 2, 3, 4 and 5 on this document <https://docs.luxonis.com/tutorials/stereo_calibration/>
+??? Check here that the document has changed. Which board should people use here, since they don't have the same camera configuration?
+This calibration has to be done at the beginning of every week...
+
+
+### Generate the calibration files which will contain the exposure and ISO specifications
+
+On the terminal run:
+
+`python3 00_control_exp_ISO_mono.py` 
+
+Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
+
+Next run:
+
+`python3 01_control_exp_ISO_rgb.py`
+
+Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them.Press q to terminate the script. 
+
+### Collect rgb and depth images
+
+On the terminal run:
+
+`./run.sh`
+
+The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder...
+
 
 ### 00_control_exp_ISO_mono.py 
 
