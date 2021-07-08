@@ -1,8 +1,8 @@
 # About this Repo
 
-We are the BenchBotics an amazing team working together since different locations. We have deployed a great use case of the OAK-D Camera system in one of our main developments "The BenchBot".
+We are the BenchBotics an amazing team working together since different locations. We have deployed a great use case for the OAK-D Camera system in one of our main developments "The BenchBot".
 
-Please take a look of the folders within the "Code Section" to replicate the use of the camera in similar conditions. This system is totally open-source. For more details and a longer description per section, please visit our Wiki page.
+Please take a look of the folders within the "Code Section" to replicate the use of the camera in similar conditions. This system is totally open-source. For more details and a longer description per section, please visit our [Wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/1.-Background) page.
 
 Here a brief description, enjoy this repo as we enjoyed this deployment.
 
