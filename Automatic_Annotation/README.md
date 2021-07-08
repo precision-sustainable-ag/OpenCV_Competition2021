@@ -5,7 +5,7 @@
 1. After cloning the OpenCV_Competition2021 repo, `cd` into the Automatic_Annotation folder. 
 2. In the command line, run the 'run.sh' file by type `bash run.sh`
 
-An "output" folder should be generated in your working directory of images
+An "output" folder should be created in your working directory of images that includes an "images" folder of foregrounds for creating synthetic dataset and a "masks" folder with binary masks for each extracted foreground. Masks have been generated as ancillary data which can be used for inspection of results and for experimental purposes. Masks are not needed for the generating synthetic data. 
 
 ---
 
