@@ -1,5 +1,5 @@
 import cv2
-from utils import specify_species, make_exg, otsu_thresh, filter_by_component_size, create_foreground
+from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
 from pathlib import Path
 
