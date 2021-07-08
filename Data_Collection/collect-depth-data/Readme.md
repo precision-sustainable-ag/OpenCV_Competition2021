@@ -6,7 +6,7 @@
 
 ### Install the last version of DepthAI
 
-`python3 -m pip install depthai
+`python3 -m pip install depthai`
 
 ### Clone this branch
 
