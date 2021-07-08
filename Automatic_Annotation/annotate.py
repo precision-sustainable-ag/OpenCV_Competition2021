@@ -1,5 +1,10 @@
+"""
+Written by: Matthew Kutugata (2021)
+Contact: mattkutugata@tamu.edu
+"""
+
 import cv2
-from utils import specify_species, make_exg, otsu_thresh, filter_by_component_size, create_foreground
+from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
 from pathlib import Path
 
@@ -45,7 +50,7 @@ class AnnotateBenchBot:
         self.area_threshold = int(args.area_threshold)
         self.target_species = args.target_species.lower()
 
-        self.species_list = specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
+        self.species_list = self.specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
         
 
     def get_VIs(self, imgpath):
@@ -136,11 +141,8 @@ class AnnotateBenchBot:
 
         return target_posix
 
-    def get_imgs_by_species(self):
-        self.species_list = specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
 
     def annotate(self):
-        
         
         for imgpath in sorted(self.species_list):
             print(imgpath)
