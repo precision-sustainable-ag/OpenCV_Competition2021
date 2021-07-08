@@ -45,7 +45,7 @@ class AnnotateBenchBot:
         self.area_threshold = int(args.area_threshold)
         self.target_species = args.target_species.lower()
 
-        self.species_list = specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
+        self.species_list = self.specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
         
 
     def get_VIs(self, imgpath):
