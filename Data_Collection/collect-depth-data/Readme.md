@@ -1,7 +1,7 @@
 
 ## Setting up the Raspberry Pi
 
-### Install Python 3 on the RPi (???)
+### Install Python 3 on the RPi4(4Gb)
 
 
 ### Install the last version of DepthAI
