@@ -1,4 +1,4 @@
-# Synthetic Data Creation
+# Synthetic Bench Images
 
 
 
