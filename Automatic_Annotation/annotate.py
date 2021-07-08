@@ -1,3 +1,8 @@
+"""
+Written by Matthew Kutugata (2021)
+mattkutugata@tamu.edu
+"""
+
 import cv2
 from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
@@ -135,9 +140,6 @@ class AnnotateBenchBot:
             target_posix = [Path(k) for k in target]
 
         return target_posix
-
-    def get_imgs_by_species(self):
-        self.species_list = specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
 
     def annotate(self):
         
