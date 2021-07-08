@@ -19,6 +19,17 @@ Lastly, manual inspection, selection, and organization of foregrounds must be pe
 
 For each week, this process took less than 10 minutes.
 
+## Annotation Arguments
+
+These arguments can be adjusted to account for some differences in features among the various species classes. 
+    --image_dir', type=str, default='sample', help='location of images to generate foregrounds')
+    --annotation_dir', type=str, default='output/annotation/sample', help='foreground output directory')
+    --top_n', type=int, default=3, help='top N largest components from image')
+    --target_species', default='all', type=str, help='Name target species from 7 classes')
+    --clear_border', action='store_false' ,help='Remove components on the border')
+    --area_threshold', default = 100, help='The maximum area, in pixels, of a contiguous hole that will be filled in the mask')
+    --min_object_size', default = 100, help='The smallest allowable mask component size')
+
 ---
 
 The BenchBotics semi-automatic annotation was designed to meet the data needs of training a convolutional neural network. The annotation system used images collected by the Oak-D sensor attached to our custom Bench Bot platform. 
