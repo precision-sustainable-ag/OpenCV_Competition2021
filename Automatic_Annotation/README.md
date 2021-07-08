@@ -7,6 +7,17 @@
 
 An "output" folder should be created in your working directory of images that includes an "images" folder of foregrounds for creating synthetic dataset and a "masks" folder with binary masks for each extracted foreground. Masks have been generated as ancillary data which can be helpful for inspecting results and for experimental purposes. Masks are not needed for the generating synthetic data. Mask file names remain the same except include a numbered suffix that represents the N component extracted from the original image.
 
+Lastly, manual inspection, selection, and organization of foregrounds must be performed by the user to divide the results into the 7 species classes; 
+1. clover
+2. cowpea
+3. grass
+4. horsetail
+5. sunflower
+6. goosefoot
+7. velvetleaf
+
+For each week, this process took less than 10 minutes.
+
 ---
 
 The BenchBotics semi-automatic annotation was designed to meet the data needs of training a convolutional neural network. The annotation system used images collected by the Oak-D sensor attached to our custom Bench Bot platform. 
