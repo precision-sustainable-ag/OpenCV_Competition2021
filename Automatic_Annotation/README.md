@@ -1,5 +1,14 @@
 # Semi-automatic annotation system
 
+## Instrcutions:
+
+1. After cloning the OpenCV_Competition2021 repo, `cd` into the Automatic_Annotation folder. 
+2. In the command line, run the 'run.sh' file by type `bash run.sh`
+
+An "output" folder should be generated in your working directory of images
+
+---
+
 The BenchBotics semi-automatic annotation was designed to meet the data needs of training a convolutional neural network. The annotation system used images collected by the Oak-D sensor attached to our custom Bench Bot platform. 
 
 ## Why
