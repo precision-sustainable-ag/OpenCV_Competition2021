@@ -23,3 +23,4 @@ The second BenchBot version has integrated a mechanical system to adjust the Ben
   <img width="300" src="https://lh4.googleusercontent.com/RVCFwbj2_s7OGirMTMOMG2b8EWb5M9PlDNIKfn7Jp1NuNTBwlvlcRs-GC7MivzObQDDFD564f5Q5PdjUvxcimARJOtnuBsaPXGWz3Q1wN3j0QgZ1RsPoC3OvP0LWgA">
   <img width="300" src="https://lh3.googleusercontent.com/8jJAcJXyjxXKO9xnlexA6BAQtWPNoqYF365rfe1BY3A3lTKZme3bIjkYDXfQ-diRKFd37oux9q9YqZCzRepcV2jO4sYB1S_U9FlzO22I-g9DWDhvzt2PJfftX5F0Ug">
 </p>
+Figure 2. New BenchBot design 
