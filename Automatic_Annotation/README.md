@@ -1,6 +1,6 @@
 # Semi-automatic annotation system
 
-## Instrcutions:
+## Instructions:
 
 1. After cloning the OpenCV_Competition2021 repo, `cd` into the Automatic_Annotation folder. 
 2. In the command line, run the 'run.sh' file by type `bash run.sh`
