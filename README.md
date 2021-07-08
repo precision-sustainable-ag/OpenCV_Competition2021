@@ -1,3 +1,4 @@
+# About this Repo
 
 We are the BenchBotics an amazing team working together since different locations. We have deployed a great use case of the OAK-D Camera system in one of our main developments "The BenchBot".
 
@@ -16,10 +17,9 @@ It is possible to install different kind of cameras under 5 kg directly to the t
 ![](https://lh5.googleusercontent.com/tHdXvMbHdc3JykFLDBgbhk_In4KXHa-Onu5khKwsVgKnKEjiw-9lHYCDIXmlkehCP7DSMlgtfk2aMkZyOmYPPvjAjiR3NqenPyKa1MjXKKUp1cqY0jNawHkdeBwmlO6qgtbFMeMM)
 Figure 1. Phenotyping prototype, RGB-D image, mounted camera, and light source. Parts of the phenotyping prototype (yellow boxes) and movements (blue arrows).
 
-The second BenchBot version has integrated a mechanical system to adjust the BenchBot structure to different bench sizes. Also, this new design has motorized wheels with control system to automatize its movement along the bench.  
+The second BenchBot version has integrated a mechanical system to adjust the BenchBot structure to different bench sizes. Also, this new design has motorized wheels with control system to automatize its movement along the bench. 
 
-![](https://lh4.googleusercontent.com/RVCFwbj2_s7OGirMTMOMG2b8EWb5M9PlDNIKfn7Jp1NuNTBwlvlcRs-GC7MivzObQDDFD564f5Q5PdjUvxcimARJOtnuBsaPXGWz3Q1wN3j0QgZ1RsPoC3OvP0LWgA)
-
-![](https://lh3.googleusercontent.com/8jJAcJXyjxXKO9xnlexA6BAQtWPNoqYF365rfe1BY3A3lTKZme3bIjkYDXfQ-diRKFd37oux9q9YqZCzRepcV2jO4sYB1S_U9FlzO22I-g9DWDhvzt2PJfftX5F0Ug)<![endif]>
-
-Actual version of the BenchBot in Maryland.
+<p align="center">
+  <img width="300" src="https://lh4.googleusercontent.com/RVCFwbj2_s7OGirMTMOMG2b8EWb5M9PlDNIKfn7Jp1NuNTBwlvlcRs-GC7MivzObQDDFD564f5Q5PdjUvxcimARJOtnuBsaPXGWz3Q1wN3j0QgZ1RsPoC3OvP0LWgA">
+  <img width="300" src="https://lh3.googleusercontent.com/8jJAcJXyjxXKO9xnlexA6BAQtWPNoqYF365rfe1BY3A3lTKZme3bIjkYDXfQ-diRKFd37oux9q9YqZCzRepcV2jO4sYB1S_U9FlzO22I-g9DWDhvzt2PJfftX5F0Ug">
+</p>
