@@ -52,10 +52,10 @@ with dai.Device(pipeline) as device:
     controlQueue = device.getInputQueue('control')
 
     # Manual exposure: key-press step, defaults and limits
-    EXP_STEP = 500  # us
+    EXP_STEP = 25  # us
     ISO_STEP = 50
 
-    exp_time = 20000
+    exp_time = 100
     exp_min = 1
     exp_max = 33000
 
