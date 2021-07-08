@@ -24,7 +24,7 @@ Bellow are listed the libraries which need to be downloaded to set up the RPi to
 
 > #### **mm_control.py**
 >
->> Use -d plus a distance in mm to move the camera to the right (positive direction). Use -h to send the camera home (negative direction). This script is mostly meant to make videos since it moves the plate very slowly.
+>> Use -d plus a distance in mm to move the camera to the right (positive direction). Use -hm to send the camera home (negative direction). This script is mostly meant to make videos since it moves the plate very slowly.
 >>
 >> ##### **Example** 
 >>

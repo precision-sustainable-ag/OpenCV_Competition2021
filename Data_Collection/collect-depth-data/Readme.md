@@ -31,7 +31,7 @@ Next run:
 
 `python3 01_control_exp_ISO_rgb.py`
 
-Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them.Press q to terminate the script. 
+Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
 
 ### Collect rgb and depth images
 
@@ -41,6 +41,13 @@ On the terminal run:
 
 The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder...
 
+### Upload the files to Azure
+
+Copy the path to the folder that needs to be uploaded. 
+
+On the temrinal run:
+
+`python3 blob_upload.py + folder path`
 
 ### 00_control_exp_ISO_mono.py 
 
