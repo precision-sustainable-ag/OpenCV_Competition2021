@@ -136,11 +136,8 @@ class AnnotateBenchBot:
 
         return target_posix
 
-    def get_imgs_by_species(self):
-        self.species_list = specify_species(Path(self.image_dir).rglob('*rgb.png'), self.target_species)
 
     def annotate(self):
-        
         
         for imgpath in sorted(self.species_list):
             print(imgpath)
