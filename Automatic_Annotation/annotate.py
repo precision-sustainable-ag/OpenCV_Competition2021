@@ -1,3 +1,8 @@
+"""
+Written by: Matthew Kutugata (2021)
+Contact: mattkutugata@tamu.edu
+"""
+
 import cv2
 from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
