@@ -1,3 +1,8 @@
+"""
+Written by Matthew Kutugata (2021)
+Contact: mattkutugata@tamu.edu
+"""
+
 import argparse
 from pathlib import Path
 import warnings
