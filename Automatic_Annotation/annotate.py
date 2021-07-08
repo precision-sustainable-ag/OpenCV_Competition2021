@@ -1,8 +1,3 @@
-"""
-Written by Matthew Kutugata (2021)
-mattkutugata@tamu.edu
-"""
-
 import cv2
 from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
@@ -141,8 +136,8 @@ class AnnotateBenchBot:
 
         return target_posix
 
+
     def annotate(self):
-        
         
         for imgpath in sorted(self.species_list):
             print(imgpath)
