@@ -45,51 +45,83 @@ The run.sh file has all the commands which will make the MM move in the positive
 
 Copy the path to the folder that needs to be uploaded. 
 
-On the temrinal run:
+On the terminal run:
 
 `python3 blob_upload.py + folder path`
 
-### 00_control_exp_ISO_mono.py 
 
-use i,o,k,l to increase/ decrease the exp_time and iso respectively. 
-use s to save config into a file. 
-it will be saved in pwd. 
+> #### **00_control_exp_ISO_mono.py **
+> Change and save exposure time and ISO settings, for the mono camera. Creates a file with the settings called **mono_calib.npz** which will be later used for the image collection.
+>
+>> Use i,o,k,l to increase/ decrease the exp_time and ISO respectively.
+>>
+>> Use s to save the desired settings into a .npz file.
+>>
+>> Use q or ctrl+c to terminate.
 
-### 01_control_exp_ISO_rgb.py
 
-use i,o,k,l to increase/ decrease the exp_time and iso respectively. 
-use , . to control focus manually 
-use w to cycle between whitebalance modes 
-use d to select EDOF mode for autofocus. 
-use e to lock exposure 
-use b to lock wb 
-use s to save config into a file. 
-it will be saved in pwd. 
+> #### **01_control_exp_ISO_rgb.py **
+> Change and save exposure time and ISO settings, control focus manually and more, for the rgb camera. Creates a file with the settings called **RGB_calib.npz** which will be later used for the image collection. 
+>
+>> Use i,o,k,l to increase/ decrease the exp_time and ISO respectively.
+>>
+>> Use , . to control focus manually.
+>>
+>> Use w to cycle between whitebalance modes.
+>>
+>> Use d to select EDOF mode for autofocus.
+>>
+>> Use e to lock exposure.
+>>
+>> Use b to lock wb 
+>>
+>> Use s to save the desired settings into a .npz file.
+>>
+>> Use q or ctrl+c to terminate.
 
-### 02_save_rgb_depth_data.py 
+> #### **02_save_rgb_depth_data.py **
+> Save rgb and depth data on a specified folder.
+>
+>> This script takes the arguments -sp (path to where images will be saved), -n (number of images to be saved), -d (save depth,l,r,disp/rgb images), -c (use calibration), -f (focus mode, xx to xx), -mc (path to mono calibration file), -rc (path to RGB calibration file).
+>>
+>> **Example**
+>>
+>> `python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz`
+>>
+>> In the example, xxx
+>>
+>> Mono camera has no focus control, so in any case wait for 100 frames for the camera control parameters to kick in and then capture 'n' frames saved in 'sp' 
 
-Run script using.
-02_save_rgb_depth_data.py -sp <path/to/save/images/> -n <num_of_images_to_save> -d <save depth,l,r,disp/rgb images> -c <use/calibration> -f <set_focus_mode> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
+
 
 At any point, use --help to get help on arguments to pass. 
-Mono camera has no focus control, so in any case wait for 100 frames for the camera control parameters to kick in and then capture 'n' frames saved in 'sp' 
+
 
 Will save the disparity maps and the same maps conv to depth arrays (.npy) in the specified directory. Modified from the gen2-camera-demo script on depthai-experiments. 
 
-### 03_save_video.py 
 
-same procedure as 02. 
-videos saved as 720p encoded h264 (mono) and 4K encoded (h265) color in savepath. Need to convert to mp4 using ffmpeg. Commands to come up after pressing ctrl+c in the script. 
+> #### **03_save_video.py**
+> Save videos as 720p encoded h264 (mono) and 4K encoded h265 (color) on a specified path.
+>
+>> This script takes the arguments -sp (path to where images will be saved), -c (use calibration), -f (focus mode, xx to xx), -mc (path to mono calibration file), -rc (path to RGB calibration file).
+>>
+>> **Example**
+>>
+>> `python3 03_save_video.py -sp /home/pi/collected_data/week1/$number/videos/$(date +"%Y_%m_%d_%H_%M_%S") -c use_calibration -f 5 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz`
+>>
+>> In the example, xxx
+
 
 ### 04_save_synced_frames.py 
 
 Run script using.
 04_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode_using_full_strings> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
 
-### 05_rgb_preview.py 
 
-Run script using.
-05_rgb_preview.py 
-quit pressing "q" or ctrl+c into the terminal
+> #### **05_rgb_preview.py **
+> Visualize what the oak-d camera is seeing. Opens pop-up windows for the rgb and depth cameras.
+>
+>> Quit by clicking on one of the windows and pressing q or ctrl+c in the terminal.
+
 
 use --help argument to go to help menu of any script. 
