@@ -5,7 +5,7 @@
 1. After cloning the OpenCV_Competition2021 repo, `cd` into the Automatic_Annotation folder. 
 2. In the command line, run the 'run.sh' file by type `bash run.sh`
 
-An "output" folder should be created in your working directory of images that includes an "images" folder of foregrounds for creating synthetic dataset and a "masks" folder with binary masks for each extracted foreground. Masks have been generated as ancillary data which can be helpful for inspecting results and for experimental purposes. Masks are not needed for generating synthetic data. Mask file names remain the same except for a numbered suffix which has been added to represents the N component extracted from the original image.
+An "output" folder should be created in your working directory. An "images" folder of foregrounds for creating synthetic dataset and a "masks" folder with binary masks for each extracted foreground will be populated with results. Masks have been generated as ancillary data which can be helpful for inspecting results and for experimental purposes. Masks are not needed for generating synthetic data. Mask file names remain the same except for a numbered suffix which has been added to represents the N component extracted from the original image.
 
 Lastly, manual inspection, selection, and organization of foregrounds must be performed by the user to divide the results into the 7 species classes: 
 
