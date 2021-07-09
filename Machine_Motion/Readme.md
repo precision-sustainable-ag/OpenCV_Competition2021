@@ -22,7 +22,7 @@ Bellow are listed the libraries which need to be downloaded to set up the RPi to
 ### Use any of the .py scripts included in this section to controll the MM
 
 
-> #### **mm_control.py**
+> ### **mm_control.py**
 >
 >> Use -d plus a distance in mm to move the camera to the right (positive direction). Use -hm to send the camera home (negative direction). This script is mostly meant to make videos since it moves the plate very slowly.
 >>
@@ -33,7 +33,7 @@ Bellow are listed the libraries which need to be downloaded to set up the RPi to
 >> Will move the camera 200 mm in the positive direction
 
 
-> #### **set_distance.py**
+> ### **set_distance.py**
 >
 >> This script will ask how much do you want to move (in mm) and in which direction, positive (p) or negative (n). The speed at which the plate moves is higher than for the mm_cotrol.py script. Better suited for taking static pictures or for positioning the camera in a desired place. 
 >>
@@ -42,7 +42,7 @@ Bellow are listed the libraries which need to be downloaded to set up the RPi to
 >>`python3 set_distance.py`
 
 
-> #### **going_home.py**
+> ### **going_home.py**
 >
 >> This script sends the camera home at a fast speed.
 >>
