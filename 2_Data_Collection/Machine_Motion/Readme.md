@@ -51,3 +51,7 @@ Use any of the .py scripts included in this section to controll the MM
 >> ##### **On the terminal** 
 >>
 >>`python3 going_home.py`
+
+---
+
+For more details visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection) page 
