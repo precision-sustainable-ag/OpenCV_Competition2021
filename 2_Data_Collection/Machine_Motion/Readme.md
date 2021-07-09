@@ -21,7 +21,9 @@ Bellow are the requirements to set up the RPi to work with the MM.
 
 The RPi is now ready to work with the MM controller.
 
-### Use any of the .py scripts included in this section to controll the MM
+## MM scripts
+
+Use any of the .py scripts included in this section to controll the MM
 
 
 > ### **mm_control.py**
