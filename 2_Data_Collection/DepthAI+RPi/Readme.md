@@ -24,13 +24,13 @@ On the terminal run:
 
 `python3 00_control_exp_ISO_mono.py` 
 
-Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
+Use i,o,k and l to to increase/ decrease the exp_time and ISO respectively. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
 
 Next run:
 
 `python3 01_control_exp_ISO_rgb.py`
 
-Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
+Use i,o,k and l to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
 
 ### Collect rgb and depth images
 
@@ -38,7 +38,8 @@ On the terminal run:
 
 `./run_5.sh`
 
-The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder...
+The run_5.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder named according to the metadata: date and time, pot line number on the bench and stop number of the camera slider within the line. More details about the protocol [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection
+).
 
 ### Upload the files to Azure
 
