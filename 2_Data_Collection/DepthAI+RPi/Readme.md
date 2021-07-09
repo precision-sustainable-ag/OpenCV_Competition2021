@@ -49,7 +49,7 @@ On the terminal run:
 
 `python3 blob_upload.py + folder path`
 
-## Scripts description
+## DepthAI scripts
 
 > ### **00_control_exp_ISO_mono.py**
 > Change and save exposure time and ISO settings, for the mono camera. Creates a file with the settings called **mono_calib.npz** which will be later used for the image collection.
