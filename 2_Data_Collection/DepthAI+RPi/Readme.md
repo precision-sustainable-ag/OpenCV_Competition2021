@@ -122,3 +122,5 @@ Run script using.
 >> Quit by clicking on one of the windows and pressing q or ctrl+c in the terminal.
 
 use --help argument to go to help menu of any script. 
+
+For more details visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection) page
