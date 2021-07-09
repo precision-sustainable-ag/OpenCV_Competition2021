@@ -1,12 +1,9 @@
 
 ## Data collection steps
 
-### Install Python 3 on the RPi (???)
-
-
 ### Install the last version of DepthAI
 
-`python3 -m pip install depthai==0.0.2.1+363f8cbae3af93e2b7283913dd82012e234641da --extra-index-url`
+`python3 -m pip install depthai`
 
 ### Clone this branch
 
@@ -37,7 +34,7 @@ Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Us
 
 On the terminal run:
 
-`./run.sh`
+`./run_5.sh`
 
 The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder...
 
