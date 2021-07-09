@@ -9,7 +9,8 @@ An "output" folder should be created in your working directory. An "images" and 
 
 ## pot_generator
 
-These arguments can be adjusted to account for some differences in features among the various species classes. 
+### Arguments
+
 ```
     --bench_dir, type=str, required=True, dest="bench_dir", default="bench", help="Location of empty bench images.
     --pot_dir, type=str, required=True, dest="pot_dir", default="pots", help="Location of empty pot directory.
