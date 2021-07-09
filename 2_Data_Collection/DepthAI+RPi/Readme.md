@@ -43,6 +43,8 @@ The run_5.sh file has all the commands which will make the MM move in the positi
 
 ### Upload the files to Azure
 
+Before the upload make sure that you follow [this steps](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/master/2_Data_Collection/Azure-manage-blobs/readme.md) to make sure all the requirementas are satisfied.
+
 Copy the path to the folder that needs to be uploaded. 
 
 On the terminal run:
@@ -89,17 +91,9 @@ On the terminal run:
 >>
 >> `python3 02_save_rgb_depth_data.py -sp /home/pi/collected_data/week1/$number/stop11/$(date +"%Y_%m_%d_%H_%M_%S") -n 30 -d -dr r -c use_calibration -f 3 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz`
 >>
->> In the example, xxx
+>> Mono camera has no focus control, so in any case wait for 100 frames for the camera control parameters to kick in and then capture 'n' frames saved in 'sp'.
 >>
->> Mono camera has no focus control, so in any case wait for 100 frames for the camera control parameters to kick in and then capture 'n' frames saved in 'sp' 
-
-
-
-At any point, use --help to get help on arguments to pass. 
-
-
-Will save the disparity maps and the same maps conv to depth arrays (.npy) in the specified directory. Modified from the gen2-camera-demo script on depthai-experiments. 
-
+>> Will save the disparity maps and the same maps conv to depth arrays (.npy) in the specified directory. Modified from the gen2-camera-demo script on depthai-experiments. 
 
 > ### **03_save_video.py**
 > Save videos as 720p encoded h264 (mono) and 4K encoded h265 (color) on a specified path.
@@ -110,13 +104,11 @@ Will save the disparity maps and the same maps conv to depth arrays (.npy) in th
 >>
 >> `python3 03_save_video.py -sp /home/pi/collected_data/week1/$number/videos/$(date +"%Y_%m_%d_%H_%M_%S") -c use_calibration -f 5 -mc /home/pi/mono_calib.npz -rc /home/pi/RGB_calib.npz`
 >>
->> In the example, xxx
 
-
-### 04_save_synced_frames.py 
-
-Run script using.
-04_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode_using_full_strings> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
+> ### 04_save_synced_frames.py 
+>
+>> Run script using.
+>> 04_save_synced_frames.py -sp <path/to/save/images/> -m <time_to_take_pictures> -d <dirty_flag(use if folder exists)> -c <use/calibration> -af <set_focus_mode_using_full_strings> -mc <path/to/calibration_file_mono> -rc <path/to/calibration_file_rgb> 
 
 
 > ### **05_rgb_preview.py**
