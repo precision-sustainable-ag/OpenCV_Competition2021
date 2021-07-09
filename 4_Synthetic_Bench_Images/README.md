@@ -7,7 +7,7 @@
 
 An "output" folder should be created in your working directory. An "images" and "masks" folder should be created and be populated with synthetic bench images and masks, respectively.
 
-## pot_genertor
+## pot_generator
 
 These arguments can be adjusted to account for some differences in features among the various species classes. 
 ```
@@ -20,7 +20,7 @@ These arguments can be adjusted to account for some differences in features amon
 ```
 ---
 
-The BenchBotics semi-automatic annotation was designed to meet the data needs of training a convolutional neural network. The annotation system used images collected by the Oak-D sensor attached to our custom Bench Bot platform. 
+Synthetic BenchBot images were created to diversify trainset and further test trained model. Images were collected by the Oak-D sensor attached to our custom Bench Bot platform. 
 
 ---
 
