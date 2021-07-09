@@ -1,7 +1,7 @@
 # CNN complete pipeline:
 
 ```mermaid
- graph TD;
+graph TD;
   A[(Annotated Structures)] --> X;
   A --> Y[(Synthetic Bench Images)] --> Z;
   X[(Synthetic Natural Images)] --> Z;
@@ -12,6 +12,7 @@
   L -- FP16 --> IR;
   IR --> D{Best Performance?};
   D --> O[[Model Compiler - blob]];
+end
 ```
 
 ---
