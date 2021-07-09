@@ -16,7 +16,6 @@ An "output" folder should be created in your working directory. An "images" and 
     --pot_dir, type=str, required=True, dest="pot_dir", default="pots", help="Location of empty pot directory.
     --annotation_dir, type=str, required=True, dest="annotation_dir", default="annotations", help="Location of annotation plants.
     --save_dir, type=str, required=True, dest="save_dir", default="output", help="Location to save results.
-    --mode, type=str, dest="mode", default="random", help="NOT FUNCTIONAL 'random', 'by_week', 'by_commonname'
     --count, type=int, dest="count", default=5, help="Number of images to create."
 ```
 ---
