@@ -11,9 +11,11 @@
 
 ### Calibrate the oak-d camera
 
-Follow steps 2, 3, 4 and 5 on this document <https://docs.luxonis.com/tutorials/stereo_calibration/>
-??? Check here that the document has changed. Which board should people use here, since they don't have the same camera configuration?
-This calibration has to be done at the beginning of every week...
+Follow [this document](<https://docs.luxonis.com/tutorials/stereo_calibration/>) to calibrate the camera. For our particular set up we used a custom board according to the [DepthAI FFC](https://docs.luxonis.com/en/latest/pages/products/bw1098ffc/) camera version. The custom json board calibration file can be seen [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/master/2_Data_Collection/DepthAI%2BRPi/WEED01.json
+). This json file needs to be included in this path /home/pi/<depthai_path>/resources/boards.
+
+
+The camera calibration was done every week to guarantee that any change on the dimensions of the plastica case due to temperature variations was taking into account. 
 
 
 ### Generate the calibration files which will contain the exposure and ISO specifications
@@ -22,13 +24,13 @@ On the terminal run:
 
 `python3 00_control_exp_ISO_mono.py` 
 
-Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
+Use i,o,k and l to to increase/ decrease the exp_time and ISO respectively. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
 
 Next run:
 
 `python3 01_control_exp_ISO_rgb.py`
 
-Use x, x, x and x to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
+Use i,o,k and l to to increase/ decrease the exp_time and ISO respectively. Use , . to control focus manually. Use w to cycle between white balance modes. Once you are satisfied with the settings use the key s to save them. Press q to terminate the script. 
 
 ### Collect rgb and depth images
 
@@ -36,7 +38,8 @@ On the terminal run:
 
 `./run_5.sh`
 
-The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder...
+The run_5.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder named according to the metadata: date and time, pot line number on the bench and stop number of the camera slider within the line. More details about the protocol [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection
+).
 
 ### Upload the files to Azure
 
