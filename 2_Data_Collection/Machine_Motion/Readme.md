@@ -3,7 +3,7 @@ The BenchBot platform can be easily controlled using the MachineMotion (MM) cont
 
 ## Setting up the Raspberry Pi
 For our particular setup we are using a Raspberry Pi (RPi) 4 as our processing unit, through which we control the MM controller and the oak-d camera. 
-Bellow are listed the libraries which need to be downloaded to set up the RPi to work with the MM.
+Bellow are the requirements to set up the RPi to work with the MM.
 
 ### Install Python 3 on the RPi (???)
 
@@ -18,6 +18,8 @@ Bellow are listed the libraries which need to be downloaded to set up the RPi to
 `pip install -U pathlib`
 
 `pip install -U paho-mqtt`
+
+The RPi is now ready to work with the MM controller.
 
 ### Use any of the .py scripts included in this section to controll the MM
 
