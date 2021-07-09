@@ -1,5 +1,5 @@
 
-## Setting up the Raspberry Pi
+## Data collection steps
 
 ### Install Python 3 on the RPi (???)
 
