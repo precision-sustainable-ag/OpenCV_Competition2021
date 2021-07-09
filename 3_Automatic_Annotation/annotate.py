@@ -7,6 +7,7 @@ import cv2
 from utils import make_exg, otsu_thresh, filter_by_component_size, create_foreground
 import argparse
 from pathlib import Path
+from tqdm import tqdm
 
 from skimage.segmentation import clear_border
 import skimage.morphology as morphology
@@ -144,8 +145,7 @@ class AnnotateBenchBot:
 
     def annotate(self):
         
-        for imgpath in sorted(self.species_list):
-            print(imgpath)
+        for imgpath in tqdm(sorted(self.species_list)):
             # Load image
             self.get_VIs(imgpath)    
 
@@ -206,7 +206,7 @@ if __name__ == "__main__":
  
     parser = argparse.ArgumentParser()
     parser.add_argument('--image_dir', type=str, default='sample', help='"week" parent directory')
-    parser.add_argument('--annotation_dir', type=str, default='output/annotation/sample', help='"week" annotation output directory')
+    parser.add_argument('--annotation_dir', type=str, default='foreground_output/sample', help='"week" annotation output directory')
     parser.add_argument('--top_n', type=int, default=3, help='top N largest components from image')
     parser.add_argument('--target_species', default='clover', type=str, help='Name target specie by bench row')
     parser.add_argument('--clear_border', action='store_false' ,help='Remove components on the border')
