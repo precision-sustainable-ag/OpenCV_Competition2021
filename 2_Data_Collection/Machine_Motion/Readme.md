@@ -1,5 +1,5 @@
 # Machine Motion (MM)
-The BenchBot platform can be easily controlled using the MM controller which can be programmed using Python and the MM Python API. This makes the system highly versatile since we can integrate the MM Python API with other devices APIs.
+The BenchBot platform can be easily controlled using the [MM controller](https://vention.io/parts/machinemotion-1-169) which can be programmed using Python and the MM Python API. This makes the system highly versatile since we can integrate the MM Python API with other devices APIs.
 
 ## Setting up the Raspberry Pi
 For our particular setup we are using a Raspberry Pi (RPi) 4 as our processing unit, through which we control the MM controller and the oak-d camera. 
