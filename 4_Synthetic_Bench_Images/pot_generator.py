@@ -36,7 +36,7 @@ class BenchDataset:
         # Attributes created in .__init__() are called instance attributes. 
         # An instance attribute’s value is specific to a particular instance of the class. 
         self.zero_padding = 6
-        self.pot_alignment = [6, 3]
+        self.pot_alignment = [9, 6, 3]
         self.commonnames   = ["clover", "cowpea", "goosefoot", "grasses", "horseweed", "sunflower", "velvetleaf"]
 
     def _validate_args(self, args):
@@ -45,9 +45,9 @@ class BenchDataset:
         assert args.count > 0, 'count must be greater than 0'
         self.count = args.count
         # Validate 
-        if args.exclude:
-            self.exclude = args.exclude
-            assert self.exclude in self.commonnames, 'excluded species is not in available classes'
+        # if args.exclude:
+        #     self.exclude = args.exclude
+        #     assert self.exclude in self.commonnames, 'excluded species is not in available classes'
         self.mode = args.mode   
         self._validate_input_directory()
     
@@ -167,7 +167,8 @@ class BenchDataset:
             # Get (lists) of image paths
             bench_path = random.choice(self.bench_images)    
             
-            pot_alignment = 9#random.choice(self.pot_alignment)
+            pot_alignment = random.choice(self.pot_alignment)
+            # pot_alignment = 3
             pot_paths = np.random.choice(self.pot_images, pot_alignment, replace=False)
             # Check for mode
             if self.mode == 'random':
@@ -189,11 +190,11 @@ class BenchDataset:
             save_maskdir = Path(self.save_dir,'masks')
             # Create file dir if needed for images and masks
             if not save_imagedir.exists():
-                print(f'save image directory does not , creating directory: {save_imagedir}')
+                print(f'save image directory does not exist, creating directory: {save_imagedir}')
                 save_imagedir.mkdir(parents=True, exist_ok=True)
             
             if not save_maskdir.exists():
-                print(f'save mask directory does not , creating directory: {save_maskdir}')
+                print(f'save mask directory does not exist, creating directory: {save_maskdir}')
                 save_maskdir.mkdir(parents=True, exist_ok=True)
             
             # Create the file stem (used for both composite and mask)
@@ -222,7 +223,6 @@ if __name__ == "__main__":
     parser.add_argument("--save_dir", type=str, required=True, dest="save_dir", default="pi/synthetic_bench", help="Location to save results.")
     parser.add_argument("--mode", type=str, dest="mode", default="random", help="NOT FUNCTIONAL 'random', 'by_week', 'by_commonname'")
     parser.add_argument("--count", type=int, dest="count", default=5, help="Number of images to create.")
-    parser.add_argument("--exclude", type=str, dest="exclude", default=None, help="Commonname to exclude for the purpose of balancing dataset.")
     args = parser.parse_args()
 
     ben = BenchDataset()
