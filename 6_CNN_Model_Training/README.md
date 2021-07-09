@@ -2,16 +2,16 @@
 
 ```mermaid
 graph TD
-A(Annotated Structures) --> X((Circle))
-A --> Y[Synthetic Bench Images] --> Z
-X[Synthetic Natural Images] --> Z
-Z(DeepLabV3+ Tensorflow Training) --> M[Small Model]
-Z --> L[Large Model]
-IR(Intermediate Representation)
-M -- FP16 --> IR 
-L -- FP16 --> IR 
-IR --> D{Best Performance?}
-D --> O[Model Compiler - blob]
+  A(Annotated Structures) --> X((Circle))
+  A --> Y[Synthetic Bench Images] --> Z
+  X[Synthetic Natural Images] --> Z
+  Z(DeepLabV3+ Tensorflow Training) --> M[Small Model]
+  Z --> L[Large Model]
+  IR(Intermediate Representation)
+  M -- FP16 --> IR 
+  L -- FP16 --> IR 
+  IR --> D{Best Performance?}
+  D --> O[Model Compiler - blob]
 ```
 ---
 
