@@ -1,4 +1,4 @@
-# Machine_Motion
+# Machine Motion (MM)
 The BenchBot platform can be easily controlled using the MachineMotion (MM) controller which can be programmed using Python and the MM Python API. This makes the system highly versatile since we can integrate the MM Python API with other devices APIs.
 
 ## Setting up the Raspberry Pi
