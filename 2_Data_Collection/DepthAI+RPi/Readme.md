@@ -11,9 +11,10 @@
 
 ### Calibrate the oak-d camera
 
-Follow steps 2, 3, 4 and 5 on this document <https://docs.luxonis.com/tutorials/stereo_calibration/>
-??? Check here that the document has changed. Which board should people use here, since they don't have the same camera configuration?
-This calibration has to be done at the beginning of every week...
+Follow [this document](<https://docs.luxonis.com/tutorials/stereo_calibration/>) to calibrate the camera. For our particular set up we used a custom board according to the [DepthAI FFC](https://docs.luxonis.com/en/latest/pages/products/bw1098ffc/) camera version. The custom json board calibration file can be seen [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/master/2_Data_Collection/DepthAI%2BRPi/WEED01.json
+). 
+
+The camera calibration was done every week to guarantee that any change on the dimensions of the plastica case due to temperature variations was taking into account. 
 
 
 ### Generate the calibration files which will contain the exposure and ISO specifications
