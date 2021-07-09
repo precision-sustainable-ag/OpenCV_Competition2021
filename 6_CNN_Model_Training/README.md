@@ -1,10 +1,10 @@
 # CNN complete pipeline:
 
-<div class="mermaid">
+```mermaid
   graph TD
-  A[(Annotated Structures)] --> X((Circle))
-  A --> Y[(Synthetic Bench Images)] --> Z
-  X[(Synthetic Natural Images)] --> Z
+  A(Annotated Structures) --> X((Circle))
+  A --> Y[Synthetic Bench Images] --> Z
+  X[Synthetic Natural Images] --> Z
   Z(DeepLabV3+ Tensorflow Training) --> M[Small Model]
   Z --> L[Large Model]
   IR(Intermediate Representation)
@@ -12,7 +12,8 @@
   L -- FP16 --> IR 
   IR --> D{Best Performance?}
   D --> O[Model Compiler - blob]
-</div>
+```
+
 ---
 
 In this section you could find the next: 
