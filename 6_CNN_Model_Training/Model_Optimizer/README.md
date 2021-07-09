@@ -1,6 +1,6 @@
 # Model optimizer
 
-For running the model optimizer use the Jupyter notebook with Python 3 (OpenVINO 2020.3.2 LTS) environment.
+For running the model optimizer use the [Jupyter notebook](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/master/6_CNN_Model_Training/Model_Optimizer/Optimizer_Benchmark-BenchBot.ipynb) with Python 3 (OpenVINO 2020.3.2 LTS) environment.
 
 ![](https://lh4.googleusercontent.com/q8GmA_jSUmxk7_1zc9UXgb_u-RI1a6ZxpCYGPrAnYCzDAyOJOZYJR81vieTYIFYF6K2qBvlyvEe3QJYWJYE6rrc1HhcW2ZMf12PY1712d9cPVloyHt_tfsooWDZWm2nPFcnSZfNb)
 
