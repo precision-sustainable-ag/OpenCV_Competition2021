@@ -28,7 +28,6 @@ def overlay(bench_path, pot_paths, plant_paths,pot_alignment): # 'pot' or 'plant
 def overlay_pot(background, pot_paths, rand_seed, pot_alignment):
     """
     Returns BGRA image and single channel mask
-    https://stackoverflow.com/questions/40895785/using-opencv-to-overlay-transparent-image-onto-another-image
     """
     
     background_width, background_height = background.shape[1], background.shape[0]
@@ -304,7 +303,6 @@ def pot_centers( all_pot_pos, pot_hw):
 
     return plant_locs
 
-    
 def plant_location(pot_center, pot_number, plant_shape):
     print(pot_center)
     print(pot_number)
