@@ -1,19 +1,6 @@
-# CNN complete pipeline:
+# CNN Model Training Pipeline:
 
-```mermaid
-graph TD;
-  A[(Annotated Structures)] --> X;
-  A --> Y[(Synthetic Bench Images)] --> Z;
-  X[(Synthetic Natural Images)] --> Z;
-  Z(DeepLabV3+ Tensorflow Training) --> M[Small Model];
-  Z --> L[Large Model];
-  IR(Intermediate Representation);
-  M -- FP16 --> IR;
-  L -- FP16 --> IR;
-  IR --> D{Best Performance?};
-  D --> O[[Model Compiler - blob]];
-end
-```
+![](https://lh3.googleusercontent.com/Lo7VfKwhGR_RKORQAv2O3CmGTxENMRFDLxcI7u7bASJNglgN3hexbrNoMCo53oDVavb3TtmLL_dhfB7p6e8JWPeg1uUNjy7yOl_fF5pphLsPF6uHd1KMtiouxTdxoloj7KMWPFxm)
 
 ---
 
