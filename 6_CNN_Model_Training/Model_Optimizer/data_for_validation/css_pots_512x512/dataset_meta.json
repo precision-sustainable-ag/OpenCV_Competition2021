@@ -1,0 +1,10 @@
+{
+    "label_map": {
+        "0": "Soil",
+        "1": "Clover",
+        "2": "Broadleaf",
+        "3": "Grass"
+    },
+    "background_label": "0",
+    "segmentation_colors": [[166, 86, 40], [228, 26, 28], [155, 126, 184], [255, 127, 0]]
+}
