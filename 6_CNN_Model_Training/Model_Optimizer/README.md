@@ -12,7 +12,7 @@ For creating blob model file to load into Myridax VPU use this [Luxonis Tool](ht
 
 ![](https://lh3.googleusercontent.com/OJkuXAX2JJnbfEhFosDeKJbp8BiQPK2ZzWIgf25pkWO3WjzraQg8OvNpvlc8coqsVlPqWV9eIMBhyPi6OulKhPyk0K6JLvtziXi4ehdsBrBIw6L2rw426RnAKBr7Eg-_q9ih1S8k)
 
-> OpenVINO Version: 2020.3
+> OpenVINO Version: 2021.3
 >> Model source: OpenVINO Model
 >> 
 >> Upload .xml and .bin files using the interface
