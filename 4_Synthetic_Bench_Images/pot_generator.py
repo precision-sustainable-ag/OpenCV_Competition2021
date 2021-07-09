@@ -217,10 +217,10 @@ class BenchDataset:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bench_dir", type=str, required=True, dest="bench_dir", default="pi/synthetic_bench/bench", help="Location of empty bench images.")
-    parser.add_argument("--pot_dir", type=str, required=True, dest="pot_dir", default="pi/synthetic_bench/pots", help="Location of empty pot directory.")
-    parser.add_argument("--annotation_dir", type=str, required=True, dest="annotation_dir", default="pi/annotations", help="Location of annotation plants.")
-    parser.add_argument("--save_dir", type=str, required=True, dest="save_dir", default="pi/synthetic_bench", help="Location to save results.")
+    parser.add_argument("--bench_dir", type=str, required=True, dest="bench_dir", default="bench", help="Location of empty bench images.")
+    parser.add_argument("--pot_dir", type=str, required=True, dest="pot_dir", default="pots", help="Location of empty pot directory.")
+    parser.add_argument("--annotation_dir", type=str, required=True, dest="annotation_dir", default="annotations", help="Location of annotation plants.")
+    parser.add_argument("--save_dir", type=str, required=True, dest="save_dir", default="output", help="Location to save results.")
     parser.add_argument("--mode", type=str, dest="mode", default="random", help="NOT FUNCTIONAL 'random', 'by_week', 'by_commonname'")
     parser.add_argument("--count", type=int, dest="count", default=5, help="Number of images to create.")
     args = parser.parse_args()
