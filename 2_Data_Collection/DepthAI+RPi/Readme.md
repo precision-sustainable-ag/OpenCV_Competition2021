@@ -36,9 +36,9 @@ Use i,o,k and l to to increase/ decrease the exp_time and ISO respectively. Use 
 
 On the terminal run:
 
-`./run_5.sh`
+`./run.sh`
 
-The run_5.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder named according to the metadata: date and time, pot line number on the bench and stop number of the camera slider within the line. More details about the protocol [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection
+The run.sh file has all the commands which will make the MM move in the positive direction (left to right) while the oak-d camera will collect images, and come back in the negative direction (right to left) making a video. The files will be saved on a folder named according to the metadata: date and time, pot line number on the bench and stop number of the camera slider within the line. More details about the protocol [here](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/2.-Data-Collection
 ).
 
 ### Upload the files to Azure
