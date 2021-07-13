@@ -2,6 +2,7 @@
 
 To run the notebooks please use Jupyter Notebooks and prepare your system with:
 
+- python3.
 - numpy.
 - pandas.
 - glob.
@@ -10,6 +11,8 @@ To run the notebooks please use Jupyter Notebooks and prepare your system with:
 - matplotlib
 - sklearn.
 - statsmodels.
+
+
 
 
 
