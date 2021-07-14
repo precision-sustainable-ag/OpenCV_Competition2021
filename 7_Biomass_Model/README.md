@@ -28,7 +28,7 @@ Use [this notebook](https://github.com/precision-sustainable-ag/OpenCV_Competiti
 
 ----
 
-For more details please visit our wiki page.
+For more details please visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/7.-Biomass-estimation-model) page.
 
 
 
