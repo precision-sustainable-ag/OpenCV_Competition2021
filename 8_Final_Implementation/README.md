@@ -38,7 +38,7 @@ Use color_segmentation/py for weed species identification, and biomass estimatio
 
 ![image](https://user-images.githubusercontent.com/70924969/125471205-2f4777a9-cd56-499f-b7a7-1d1df0f764f0.png)
 
-Figure 1.  Screenshot of the Final implementation 
+Figure 1.  Screenshot of the Final implementation. Semantic segmentation labels: Red (Clover), Orange (Grass), Purple (Broadleaf) 
 
 ---
 
