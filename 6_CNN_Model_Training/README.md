@@ -2,6 +2,8 @@
 
 ![](https://lh3.googleusercontent.com/Lo7VfKwhGR_RKORQAv2O3CmGTxENMRFDLxcI7u7bASJNglgN3hexbrNoMCo53oDVavb3TtmLL_dhfB7p6e8JWPeg1uUNjy7yOl_fF5pphLsPF6uHd1KMtiouxTdxoloj7KMWPFxm)
 
+Figure 1. CNN Models Pipeline
+
 ---
 
 In this section you could find the next: 
