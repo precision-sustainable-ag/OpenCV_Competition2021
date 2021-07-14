@@ -42,5 +42,5 @@ Figure 1.  Screenshot of the Final implementation
 
 ---
 
-For more details please visit our wiki page
+For more details please visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/8.-Final-Implementation) page
 
