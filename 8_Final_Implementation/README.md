@@ -4,16 +4,20 @@
 
 Install the following dependancies into RPi for the embedded biomass model and real-time plotting. 
 
-*pip3 install joblib
+> ### **dependencies**
+>>
+>> pip3 install joblib
+>> 
+>> pip3 install scikit-learn==0.24.1
 
-*pip3 install scikit-learn==0.24.1
+>> pip3 install matplotlib
 
-*pip3 install matplotlib
+>> sudo apt-get install python3-gi-cairo
 
-*sudo apt-get install python3-gi-cairo
+> ### **install the requirements**
+>>
+>> python3 install_requirements.py
 
-Run the following to install the requirements required for the OAK-D Camera: 
-*python3 install_requirements.py 
 
 In the folder /models/BiomassModel, there are three CSV files(clover, grass, broadleaf) containing DataFrames with several recorded biomass samples, along with calculated correlating "features" such as Excess of Green(ExG), Excess of Red(ExR), Depth (CAnopy Height Measurement), and Segmentation Pixel count.
 
