@@ -23,7 +23,7 @@ In the folder /models/BiomassModel, there are three CSV files(clover, grass, bro
 
 Use PCA.py for creating the feature vector with RGB, Depth, and semantic segmentation image (inference image) captured/processed by the OAK-D Camera. PCA.py is also used to create 3 individual Random Forest Regression models for Clover, Broadleaf, and Grass plants named: random_forest_clover.joblib, random_forest_broadleaf.joblib, random_forest_grass.joblib.
 
-## Final Implementation
+## Complete pipeline
 
 Use color_segmentation/py for weed species identification, and biomass estimation per specie. The general pipeline of this script is:
 
