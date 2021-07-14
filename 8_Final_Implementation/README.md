@@ -5,9 +5,13 @@
 Install the following dependancies into RPi for the embedded biomass model and real-time plotting. 
 
 *pip3 install joblib
+
 *pip3 install scikit-learn==0.24.1
+
 *pip3 install matplotlib
+
 *sudo apt-get install python3-gi-cairo
+
 Run the following to install the requirements required for the OAK-D Camera: 
 *python3 install_requirements.py 
 
