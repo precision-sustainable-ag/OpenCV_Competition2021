@@ -1,7 +1,9 @@
 # Final Implementation
 
-##Embedding Biomass Estimation Model
-Install the Following Dependancies for the Embedded Biomass Model and Real-Time plotting. 
+## Embedding Biomass Estimation Model
+
+Install the following dependancies into RPi for the embedded biomass model and real-time plotting. 
+
 *pip3 install joblib
 *pip3 install scikit-learn==0.24.1
 *pip3 install matplotlib
@@ -9,11 +11,15 @@ Install the Following Dependancies for the Embedded Biomass Model and Real-Time 
 Run the following to install the requirements required for the OAK-D Camera: 
 *python3 install_requirements.py 
 
+In the folder /models/BiomassModel, there are three CSV files(clover, grass, broadleaf) containing DataFrames with several recorded biomass samples, along with calculated correlating "features" such as Excess of Green(ExG), Excess of Red(ExR), Depth (CAnopy Height Measurement), and Segmentation Pixel count.
 
-  Development of the Biomass Estimation model was done on a different type of computer/OS than where the model will be embedded. Since the system architectures are different, it is not possible to simply copy and paste the developed model onto the Raspberry Pi 4B+ controlling the OAK-D Camera and the BenchBot's motion. The models must be retrained natively on the Raspberry Pi to be reliably used to estimate crop biomass. In the folder /models/BiomassModel, there are three CSV files(clover, grass, broadleaf) containing DataFrames with several recorded biomass samples, along with calculated correlating "features" such as Excessive of Green(ExG), Excessive of Red(ExR), Depth, and Segmentation Pixel count. This feature vector was directly created from RGB, Depth, and Annotated Images captured with the OAK-D Camera before the plant samples were harvested and weighed. Training the models is done in the program PCA.py(python3 PCA.py), where a Random Forest Regressor is used to create 3 individual models for Clover, Broadleaf, and Grass plants named: random_forest_clover.joblib, random_forest_broadleaf.joblib, random_forest_grass.joblib.
+Use PCA.py for creating the feature vector with RGB, Depth, and semantic segmentation image (inference image) captured/processed by the OAK-D Camera. PCA.py is also used to create 3 individual Random Forest Regression models for Clover, Broadleaf, and Grass plants named: random_forest_clover.joblib, random_forest_broadleaf.joblib, random_forest_grass.joblib.
 
 ##Final Implementation
-  To use these models to create real-time biomass predictions it is necessary to input a feature vector which is calculated in the exact same way as the feature vector which was used during training. That means using the exact same sized RGB images, and correctly rectifying the Depth preview to correlate with the RGB images. When the program, color_segmentation.py, is ran(python3 color_segmentation.py), 4 separate windows are displayed including a RGB and Depth image of the greenhouse plant row, a segmentation mask showing the neural network's class predicitons pixel by pixel, and a real-time plot of the 3 biomass predictions from the corresponding random forest models, as shown below. 
+
+To run the final implementatio script it is neccesary to create a proper pipeline into the dephtAI framework. The RGB image is resized and center-cropped with final size of 512x512.
+
+To use these models to create real-time biomass predictions it is necessary to input a feature vector which is calculated in the exact same way as the feature vector which was used during training. That means using the exact same sized RGB images, and correctly rectifying the Depth preview to correlate with the RGB images. When the program, color_segmentation.py, is ran(python3 color_segmentation.py), 4 separate windows are displayed including a RGB and Depth image of the greenhouse plant row, a segmentation mask showing the neural network's class predicitons pixel by pixel, and a real-time plot of the 3 biomass predictions from the corresponding random forest models, as shown below. 
 ![image](https://user-images.githubusercontent.com/70924969/125471205-2f4777a9-cd56-499f-b7a7-1d1df0f764f0.png)
 
   The pipeline for the OAK-D camera is built as follows: the RGB camera stream is created at 1080P resolution with a size of 512x512 pixels, and a depth stream is created which shows the disparity map between the two OAK-D stereo cameras at 720P resolution at a size of 720x1280 pixels. Next, the RGB stream is used as the input to the Deep Learning model, 4_class_model_mobilenet_v3_large_data4_combined_class_weights_512x512_without_softmax.blob, which outputs class predictions for each pixel present in the RGB frame. The colored segmentation mask showing the class predictions is displayed, as well as overlayed over the original RGB stream. We calculate the max/min x/y values of each class prediction from the segmentation mask, which we us to approximate a bounding box around the predicted class. 
