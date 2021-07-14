@@ -9,9 +9,9 @@ Install the following dependancies into RPi for the embedded biomass model and r
 >> pip3 install joblib
 >> 
 >> pip3 install scikit-learn==0.24.1
-
+>> 
 >> pip3 install matplotlib
-
+>> 
 >> sudo apt-get install python3-gi-cairo
 
 > ### **install the requirements**
