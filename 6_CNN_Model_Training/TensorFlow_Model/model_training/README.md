@@ -1,11 +1,11 @@
 ## CNN training
 For training the CNN models, follow the guide below:
 1. Install [tensorflow 1.15.0](https://www.tensorflow.org/install/pip).
-2. Check out the [tensorflow github](https://github.com/tensorflow/models/tree/master/research).
+2. Check out the [tensorflow github repository](https://github.com/tensorflow/models/tree/master/research).
 3. Check out this repository and copy it into the repository above. 
 4. Download the [training](https://vision.eng.au.dk/?download=/data/oakd/2021/train.zip) and [validation dataset](https://vision.eng.au.dk/?download=/data/oakd/2021/val.zip)
 5. Configure and run deeplab/datasets/build_opencv_data.py to generate tfrecord of the downloaded datasets.
-6. Download the [pretrained DeepLabV3+ model](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md).
+6. Download the [pretrained DeepLabV3+ model](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md). This project uses the deeplab_mnv3_large_cityscapes_trainfine pretrained model.
 7. Train the model for 60.000 iterations (see command below for reference).
 8. Export the model (see command below for reference)
 
