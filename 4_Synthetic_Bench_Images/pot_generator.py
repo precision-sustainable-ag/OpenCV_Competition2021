@@ -33,8 +33,6 @@ A "images" and "masks" directory will be automatically generated insided your sa
 class BenchDataset:
     # Define properties that all BenchDataset objects must have
     def __init__(self):
-        # Attributes created in .__init__() are called instance attributes. 
-        # An instance attribute’s value is specific to a particular instance of the class. 
         self.zero_padding = 6
         self.pot_alignment = [9, 6, 3]
         self.commonnames   = ["clover", "cowpea", "goosefoot", "grasses", "horseweed", "sunflower", "velvetleaf"]
@@ -44,10 +42,7 @@ class BenchDataset:
         # Validate the count
         assert args.count > 0, 'count must be greater than 0'
         self.count = args.count
-        # Validate 
-        # if args.exclude:
-        #     self.exclude = args.exclude
-        #     assert self.exclude in self.commonnames, 'excluded species is not in available classes'
+        # Validate args
         self.mode = args.mode   
         self._validate_input_directory()
     
@@ -65,17 +60,13 @@ class BenchDataset:
         self.annotation_dir = Path(args.annotation_dir)
         assert self.annotation_dir.exists(), f'annotation directory does not exist: {args.pot_dir}'
         
+        # Setup data dictionaries
         self._create_foreground_dict()
         self._create_bench_list()
         self._create_pot_list()
 
     def _create_foreground_dict(self):
         # Validates input foregrounds and processes them into a foregrounds dictionary.
-        # Expected directory structure:
-        # + annotation_dir
-        #    + week_dir
-        #       + commonname_dir
-        #          + foreground_image.png
         self.foregrounds_dict = dict()
         self.weeks = []
         self.commonnames = []
@@ -109,14 +100,14 @@ class BenchDataset:
                         self.foregrounds_dict[super_category][category].append(image_file)
         if str(self.annotation_dir.parts[-1]).startswith("week"):
             self.week = str(self.annotation_dir.parts[-1])
-            # This is a super category directory
+
             for commonname_dir in self.annotation_dir.iterdir():
                 self.commonnames.append(commonname_dir.name)
                 if not commonname_dir.is_dir():
                     warnings.warn(f'file found in common name directory (expected category directories), ignoring: {commonname_dir}')
                     continue
-                # This is a category directory
-                for image_file in sorted(Path(commonname_dir).iterdir()):
+
+                    for image_file in sorted(Path(commonname_dir).iterdir()):
                     if not image_file.is_file():
                         warnings.warn(f'a directory was found inside a common name directory, ignoring: {str(image_file)}')
                         continue
@@ -168,14 +159,14 @@ class BenchDataset:
             bench_path = random.choice(self.bench_images)    
             
             pot_alignment = random.choice(self.pot_alignment)
-            # pot_alignment = 3
             pot_paths = np.random.choice(self.pot_images, pot_alignment, replace=False)
+
             # Check for mode
+            # Not working
             if self.mode == 'random':
                 # Get list of pot paths
                 rdmn_plant_paths = np.random.choice(plant_paths, pot_alignment, replace=True)
             if self.mode == 'by_week':
-                # childrenids = [child['id'] for elem in mylist for child in elem['children']]
                 pass
 
             background, mask = overlay(
