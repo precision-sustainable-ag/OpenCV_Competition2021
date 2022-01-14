@@ -4,12 +4,14 @@ Contact: mattkutugata@tamu.edu
 """
 
 import argparse
-from pathlib import Path
-import warnings
-from tqdm import tqdm
 import random
-import numpy as np
+import warnings
+from pathlib import Path
+
 import cv2
+import numpy as np
+from tqdm import tqdm
+
 from utils import overlay
 
 """
@@ -33,6 +35,8 @@ A "images" and "masks" directory will be automatically generated insided your sa
 class BenchDataset:
     # Define properties that all BenchDataset objects must have
     def __init__(self):
+        # Attributes created in .__init__() are called instance attributes. 
+        # An instance attribute’s value is specific to a particular instance of the class. 
         self.zero_padding = 6
         self.pot_alignment = [9, 6, 3]
         self.commonnames   = ["clover", "cowpea", "goosefoot", "grasses", "horseweed", "sunflower", "velvetleaf"]
@@ -42,7 +46,10 @@ class BenchDataset:
         # Validate the count
         assert args.count > 0, 'count must be greater than 0'
         self.count = args.count
-        # Validate args
+        # Validate 
+        # if args.exclude:
+        #     self.exclude = args.exclude
+        #     assert self.exclude in self.commonnames, 'excluded species is not in available classes'
         self.mode = args.mode   
         self._validate_input_directory()
     
@@ -60,13 +67,17 @@ class BenchDataset:
         self.annotation_dir = Path(args.annotation_dir)
         assert self.annotation_dir.exists(), f'annotation directory does not exist: {args.pot_dir}'
         
-        # Setup data dictionaries
         self._create_foreground_dict()
         self._create_bench_list()
         self._create_pot_list()
 
     def _create_foreground_dict(self):
         # Validates input foregrounds and processes them into a foregrounds dictionary.
+        # Expected directory structure:
+        # + annotation_dir
+        #    + week_dir
+        #       + commonname_dir
+        #          + foreground_image.png
         self.foregrounds_dict = dict()
         self.weeks = []
         self.commonnames = []
@@ -98,16 +109,17 @@ class BenchDataset:
                         if category not in self.foregrounds_dict[super_category]:
                             self.foregrounds_dict[super_category][category] = []
                         self.foregrounds_dict[super_category][category].append(image_file)
+        self.week = False
         if str(self.annotation_dir.parts[-1]).startswith("week"):
             self.week = str(self.annotation_dir.parts[-1])
-
+            # This is a super category directory
             for commonname_dir in self.annotation_dir.iterdir():
                 self.commonnames.append(commonname_dir.name)
                 if not commonname_dir.is_dir():
                     warnings.warn(f'file found in common name directory (expected category directories), ignoring: {commonname_dir}')
                     continue
-
-                    for image_file in sorted(Path(commonname_dir).iterdir()):
+                # This is a category directory
+                for image_file in sorted(Path(commonname_dir).iterdir()):
                     if not image_file.is_file():
                         warnings.warn(f'a directory was found inside a common name directory, ignoring: {str(image_file)}')
                         continue
@@ -152,33 +164,33 @@ class BenchDataset:
     def generate_bench_images(self, mode='random'): # 'random', 'by_week', 'by_commonname', or 'choas'
         plant_paths = sorted(Path(self.annotation_dir).rglob('*.png'))
         plant_paths = [str(i) for i in plant_paths]
-        # print(plant_paths)
         image_num = 0
         for i in tqdm(range(self.count)):            
             # Get (lists) of image paths
             bench_path = random.choice(self.bench_images)    
             
             pot_alignment = random.choice(self.pot_alignment)
+            # pot_alignment = 3
             pot_paths = np.random.choice(self.pot_images, pot_alignment, replace=False)
-
             # Check for mode
-            # Not working
             if self.mode == 'random':
                 # Get list of pot paths
                 rdmn_plant_paths = np.random.choice(plant_paths, pot_alignment, replace=True)
             if self.mode == 'by_week':
+                # childrenids = [child['id'] for elem in mylist for child in elem['children']]
                 pass
 
-            background, mask = overlay(
+            background, mask, bboxes = overlay(
                                 bench_path, 
                                 pot_paths, 
                                 rdmn_plant_paths,
                                 pot_alignment, 
                                 )
 
-
             save_imagedir = Path(self.save_dir,'images')
             save_maskdir = Path(self.save_dir,'masks')
+            save_bboxdir = Path(self.save_dir, 'bbox_labels')
+
             # Create file dir if needed for images and masks
             if not save_imagedir.exists():
                 print(f'save image directory does not exist, creating directory: {save_imagedir}')
@@ -187,18 +199,29 @@ class BenchDataset:
             if not save_maskdir.exists():
                 print(f'save mask directory does not exist, creating directory: {save_maskdir}')
                 save_maskdir.mkdir(parents=True, exist_ok=True)
+            if not save_bboxdir.exists():
+                print(f'save bbox label directory does not exist, creating directory: {save_maskdir}')
+                save_bboxdir.mkdir(parents=True, exist_ok=True)
             
             # Create the file stem (used for both composite and mask)
             file_stem = f'{image_num:0{self.zero_padding}}'
             if self.week:
                 save_imagepath = Path(save_imagedir,f'{self.week}_' + file_stem + '.png')
-                save_maskpath = Path(save_maskdir,f'{self.week}_' + file_stem + '.png')                
+                save_maskpath = Path(save_maskdir,f'{self.week}_' + file_stem + '.png')
+                save_bbox = Path(save_bboxdir,f'{self.week}_' + file_stem + '.txt')
             else:
                 save_imagepath = Path(save_imagedir, file_stem + '.png')
-                save_maskpath = Path(save_maskdir,file_stem + '.png')                
+                save_maskpath = Path(save_maskdir,file_stem + '.png')
+                save_bbox = Path(save_bboxdir,file_stem + '.txt')
+
             # Save results
             cv2.imwrite(str(save_imagepath), background)
             cv2.imwrite(str(save_maskpath), mask)
+            # Save bbox labels
+            for bbox in bboxes:
+                with open(save_bbox, "a") as f:
+                    f.write(("%g " * len(bbox)).rstrip() % bbox + "\n")
+
             image_num += 1
 
     def main(self, args):

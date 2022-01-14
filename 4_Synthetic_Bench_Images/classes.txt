@@ -1,0 +1,8 @@
+soil
+clover
+cowpea
+goosefoot
+grasses
+horseweed
+sunflower
+velvetleaf

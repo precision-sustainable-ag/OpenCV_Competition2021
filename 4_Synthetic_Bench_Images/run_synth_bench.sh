@@ -1,0 +1,1 @@
+python pot_generator.py --bench_dir bench --pot_dir pots --annotation_dir ../data/annotations --save_dir results --count 50000

@@ -1,8 +1,9 @@
 import random
+from pathlib import Path
+
+import cv2
 import numpy as np
 from scipy import ndimage
-import cv2
-from pathlib import Path
 
 
 def load_rgba_img(image_path):
@@ -21,9 +22,11 @@ def overlay(bench_path, pot_paths, plant_paths,pot_alignment): # 'pot' or 'plant
     # background_width, background_height = background.shape[1], background.shape[0]
     background, all_pot_pos, pot_hw = overlay_pot(background, pot_paths,rand_seed, pot_alignment)
 
-    new_background, mask = overlay_plant(background, plant_paths, all_pot_pos, pot_hw)
+    new_background, mask, bbox = overlay_plant(background, plant_paths, all_pot_pos, pot_hw)
+    
 
-    return new_background , mask
+
+    return new_background , mask, bbox
 
 def overlay_pot(background, pot_paths, rand_seed, pot_alignment):
     """
@@ -99,6 +102,7 @@ def overlay_plant(background, plant_paths, all_pot_pos,pot_hw):
     background_width, background_height = background.shape[1], background.shape[0]
     new_mask = np.zeros_like(background)
     pot_num = 0
+    bboxes = []
     for plant_path in plant_paths:
         species = Path(plant_path).parts[-2]
         plant_foreground = load_rgba_img(plant_path) 
@@ -164,8 +168,18 @@ def overlay_plant(background, plant_paths, all_pot_pos,pot_hw):
 
         new_mask[y:y+h, x:x+w] = (spec_mp) * plant_mask + new_mask[y:y+h, x:x+w]*(1.0-plant_mask)
         
+        bbox = xywh2nxywh(x,y,w,h,spec_mp)
+        bboxes.append(bbox)
 
-    return background, new_mask
+        # with open(txt_path + ".txt", "a") as f:
+        #     f.write(("%g " * len(line)).rstrip() % line + "\n")
+        # print("---------------")
+        # print(x, y)
+        # print(bbox)
+        # print("---------------")
+        
+
+    return background, new_mask, bboxes
 
 def species_map(species_str):
     sp_map = {
@@ -304,13 +318,31 @@ def pot_centers( all_pot_pos, pot_hw):
     return plant_locs
 
 def plant_location(pot_center, pot_number, plant_shape):
-    print(pot_center)
-    print(pot_number)
-    # pot_center = pot_center[pot_number]
-
+    """ Outputs coordinate of top left corner of image???"""
     h, w = plant_shape[0], plant_shape[1]
     x, y = pot_center[0] - int(w/2), pot_center[1] - int(h/2)
-
     return x, y
 
+# def get_bbox(paste_position):
+#     print("")
+
+def xywh2nxywh(x,y,sub_img_w,sub_img_h, species,super_img_w=1920, super_img_h=1080):
+    # Converts non-normalized coordinates and dimensions to normalized version for yolov5
+    norm = []
     
+    x2 = x+sub_img_w
+    y2 = y+sub_img_h
+    
+    new_x = round(((x + x2)/2)/super_img_w, 6) # x center
+    new_y = round(((y + y2)/2)/super_img_h, 6) # y center
+
+    w = round(sub_img_w/super_img_w, 6)
+    h = round(sub_img_h/super_img_h, 6)
+
+    norm.append(new_x)
+    norm.append(new_y) 
+    norm.append(w)
+    norm.append(h)
+    new_norm = (species,*norm)
+
+    return new_norm
