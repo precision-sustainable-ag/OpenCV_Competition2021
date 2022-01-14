@@ -6,6 +6,7 @@
 2. In the command line, run the 'runpot.sh' file by type `bash runpot.sh`
 
 An "output" folder should be created in your working directory. An "images" and "masks" folder should be created and be populated with synthetic bench images and masks, respectively.
+Additionally, bounding box labels are provided for each plant and their classe name.
 
 ## pot_generator
 
