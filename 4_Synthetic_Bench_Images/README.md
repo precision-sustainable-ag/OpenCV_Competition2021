@@ -1,4 +1,14 @@
-# Synthetic Bench Images
+# Semi-automatic annotation pipeline
+
+This project aims to reduce the burden of manually annotating images of weeds and other plants. We do this
+by: 
+1. Developing a library of vegetation cut-outs
+2. Generating a dataset of artificial images (using vegetation cut-outs) to train a deep learning object detection model, and 
+3. Using detection results and simple image processing techniques to extract and classify vegetation.
+
+## Workflow
+
+![](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/annotation_pipeline/4_Synthetic_Bench_Images/assets/workflow_v2_simplified_small.png)
 
 ## Instructions:
 
@@ -22,7 +32,5 @@ Additionally, bounding box labels are provided for each plant and their classe n
 ---
 
 Synthetic BenchBot images were created to diversify trainset and further test trained model. Images were collected by the Oak-D sensor attached to our custom Bench Bot platform. 
-
----
 
 For more details visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/4.-Synthetic-Bench-Images) page 
