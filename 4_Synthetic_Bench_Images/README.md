@@ -25,6 +25,4 @@ Synthetic BenchBot images were created to diversify trainset and further test tr
 
 ---
 
-![alt text](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/blob/cleanup_synbench/4_Synthetic_Bench_Images/assets/workflow_v2_simplified_small.png)
-
 For more details visit our [wiki](https://github.com/precision-sustainable-ag/OpenCV_Competition2021/wiki/4.-Synthetic-Bench-Images) page 
